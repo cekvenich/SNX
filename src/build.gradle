@@ -24,6 +24,8 @@ repositories {
 dependencies {
    // libs folder:
    compile fileTree(dir: 'libs', include: ['*.jar'])
+   //implementation 'com.github.cekvenich:SNX:0.0.1'
+
 }
 sourceSets {
    main {
@@ -43,4 +45,4 @@ shadowJar {
 // This is just the name of this project
 archivesBaseName = 'SNX'
 group = 'org.apache.SNX'
-version = '0.1.1'
+version = '0.0.1'
