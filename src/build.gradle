@@ -1,0 +1,46 @@
+// gradle tasks
+// gradle shadowJar
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
+    }
+}
+plugins {
+  id 'com.github.johnrengelman.shadow' version '5.2.0'
+  id 'java'
+}
+apply plugin: 'com.github.johnrengelman.shadow'
+// 
+apply plugin: 'java'
+repositories {
+   jcenter()
+   maven { url "https://jitpack.io" }
+}
+
+dependencies {
+   // libs folder:
+   compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+sourceSets {
+   main {
+      java { srcDirs = ["src"]}
+   }
+}
+
+// sdk install java 11.0.5-open 
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+shadowJar {
+   mergeServiceFiles()   //manifest { attributes 'Main-Class': 'org.example.MyMain' }
+
+}
+
+// This is just the name of this project
+archivesBaseName = 'SNX'
+group = 'org.apache.SNX'
+version = '0.1.1'
