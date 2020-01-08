@@ -1,59 +1,35 @@
 // gradle version 6.0.1
 // Java 11 (Amazon implmentation of Java seems good)
-// Groovy v 2.5.8
 
 // tasks CLI:
 // gradle tasks
 // gradle shadowJar
 
-// publish task! There are few alternative plugins: gradle-nexus-plugin, maven or maven-publish. I used maven-publish pluging.
-// Also, there is a shadow(to enbale fat jar)adapter that runs on top of maven-publish.
 
-// Read these pages before starting
-// http://imperceptiblethoughts.com/how-to-shadow by John Engelman
-// http://imperceptiblethoughts.com/shadow/publishing/#publishing-with-maven-publish-plugin
-// http://docs.gradle.org/current/userguide/publishing_maven.html#publishing_maven
-// http://central.sonatype.org/pages/gradle.html
-// http://www.albertgao.xyz/2018/01/18/how-to-publish-artifact-to-maven-central-via-gradle
+// sdk install java 11 
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
-// pswd: S_! 123
-// The task first makes a (fat jar), uploads and then publishes. That last step is optional, as it can be done manually. 
-
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
-    }
-}
 plugins {
   id 'com.github.johnrengelman.shadow' version '5.2.0'
   id 'java'
 }
-// 
+
 apply plugin: 'java'
 apply plugin: 'maven-publish'
 apply plugin: 'com.github.johnrengelman.shadow'
 
-shadowJar {
-   baseName = "SNX"
-   mergeServiceFiles()   // if app: manifest { attributes 'Main-Class': 'org.example.MyMain' }
-}
-publishing {
-  publications {
-     // we are using shadow adapter to maven publish
-    shadow(MavenPublication) {
-       from components.shadow
-       artifactId "SNX"
-    }
-  }
+repositories {
+   mavenCentral()
 }
 
-//
-repositories {
-   jcenter()
+buildscript {
+    repositories {
+         mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
+    }
 }
 
 dependencies {
@@ -68,12 +44,62 @@ sourceSets {e
    }
 }
 
-// sdk install java 11.0.5-open 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
-
-
-// This is just the name of this project
+// Name of this project
 archivesBaseName = 'SNX'
 group = 'org.apache.SNX'
 version = '0.0.1'
+
+// the rest is just publish stuff
+
+// publish task! There are few alternative plugins: gradle-nexus-plugin, maven or maven-publish. I used maven-publish .
+// Also, there is a shadow(to enbale fat jar)adapter that runs on top of maven-publish.
+
+// XX  Trustin Lee
+
+// Read these 7 pages before starting
+// http://imperceptiblethoughts.com/how-to-shadow by John Engelman
+// http://imperceptiblethoughts.com/shadow/publishing/#publishing-with-maven-publish-plugin
+// http://docs.gradle.org/current/userguide/publishing_maven.html#publishing_maven
+
+// http://central.sonatype.org/pages/gradle.html  deprecated
+// http://www.albertgao.xyz/2018/01/18/how-to-publish-artifact-to-maven-central-via-gradle
+
+// sign: https://medium.com/@nmauti/sign-and-publish-on-maven-central-a-project-with-the-new-maven-publish-gradle-plugin-22a72a4bfd4b
+// https://github.com/johnrengelman/shadow/issues/413
+
+// pswd: S_! 123
+// The task first makes a (fat jar), uploads, publish and sign . That publish step is optional, as it can be done manually. 
+
+
+shadowJar {
+   baseName = "SNX"
+   mergeServiceFiles()   // if app: manifest { attributes 'Main-Class': 'org.example.MyMain' }
+   //no classifier means that the shaded jar becomes the default artifact
+   classifier = ''
+}
+nexusStaging {
+    packageGroup = "org.apache.SNX"
+}
+publishing {
+    publications {
+        shadow(MavenPublication) { publication ->
+            project.shadow.component(publication)
+
+            artifactId = 'SNX'
+            artifact jar
+            artifact shadowJar
+        }
+    }
+    repositories {
+        maven {
+            def releasesRepoUrl =  "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            credentials {
+                username sonataUser
+                password sonataPswd
+            }
+        }
+    }
+}
+
