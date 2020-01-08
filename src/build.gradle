@@ -1,37 +1,43 @@
-// gradle version 6.0.1
-// Java 11 (Amazon implmentation of Java seems good)
-
-// tasks CLI:
-// gradle tasks
-// gradle shadowJar
-
+// part 1: https://imperceptiblethoughts.com/shadow/getting-started/#default-java-groovy-tasks
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
+    }
+}
 plugins {
   id 'com.github.johnrengelman.shadow' version '5.2.0'
   id 'java'
 }
-
 apply plugin: 'java'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'maven'
-
-group = 'com.github.jitpack'
 repositories {
    mavenCentral()
+   maven { url "https://jitpack.io" }
 }
-
-// sdk install java 11 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
 
 sourceSets {e 
    main {
       java { srcDirs = ["src"]}
    }
 }
+// sdk install java 11 
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+// This is just the name of this project
+archivesBaseName = 'SNX'
+group = 'com.github.jitpack'
+version = '0.1'
+// gradle version 6.0.1
+// Java 11 (Amazon implmentation of Java seems good)
+// tasks CLI:
+// gradle tasks
+// gradle shadowJar
+//part 2 https://github.com/jitpack/gradle-simple/blob/master/build.gradle
 
-repositories {
-  mavenCentral()
-}
 
 dependencies {
     // libs folder:
