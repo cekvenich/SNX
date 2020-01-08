@@ -39,7 +39,7 @@ group = 'com.github.jitpack'
 //gradlew shadowJar
 //part 2 https://github.com/jitpack/gradle-simple
 // gradle wrapper --gradle-version 6.0.1 --distribution-type all // the gradle wrapper is required 
-// as is jitpack.yaml in root,  not in source
+// as is jitpack.yaml in root,  not here
 
 dependencies {
     // libs folder:
