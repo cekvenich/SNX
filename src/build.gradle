@@ -1,5 +1,24 @@
+// gradle version 6.0.1
+// Java 11 (Amazon implmentation of Java seems good)
+// Groovy v 2.5.8
+
+// tasks CLI:
 // gradle tasks
 // gradle shadowJar
+
+// publish task! There are few alternative plugins: gradle-nexus-plugin, maven or maven-publish. I used maven-publish pluging.
+// Also, there is a shadow(to enbale fat jar)adapter that runs on top of maven-publish.
+
+// Read these pages before starting
+// http://imperceptiblethoughts.com/how-to-shadow by John Engelman
+// http://imperceptiblethoughts.com/shadow/publishing/#publishing-with-maven-publish-plugin
+// http://docs.gradle.org/current/userguide/publishing_maven.html#publishing_maven
+// http://central.sonatype.org/pages/gradle.html
+// http://www.albertgao.xyz/2018/01/18/how-to-publish-artifact-to-maven-central-via-gradle
+
+// pswd: S_! 123
+// The task first makes a (fat jar), uploads and then publishes. That last step is optional, as it can be done manually. 
+
 
 buildscript {
     repositories {
@@ -13,12 +32,28 @@ plugins {
   id 'com.github.johnrengelman.shadow' version '5.2.0'
   id 'java'
 }
-apply plugin: 'com.github.johnrengelman.shadow'
 // 
 apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+shadowJar {
+   baseName = "SNX"
+   mergeServiceFiles()   // if app: manifest { attributes 'Main-Class': 'org.example.MyMain' }
+}
+publishing {
+  publications {
+     // we are using shadow adapter to maven publish
+    shadow(MavenPublication) {
+       from components.shadow
+       artifactId "SNX"
+    }
+  }
+}
+
+//
 repositories {
    jcenter()
-   maven { url "https://jitpack.io" }
 }
 
 dependencies {
@@ -27,7 +62,7 @@ dependencies {
    //implementation 'com.github.cekvenich:SNX:0.0.1'
 
 }
-sourceSets {
+sourceSets {e 
    main {
       java { srcDirs = ["src"]}
    }
@@ -37,10 +72,6 @@ sourceSets {
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
 
-shadowJar {
-   mergeServiceFiles()   //manifest { attributes 'Main-Class': 'org.example.MyMain' }
-
-}
 
 // This is just the name of this project
 archivesBaseName = 'SNX'
