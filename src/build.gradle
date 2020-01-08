@@ -5,101 +5,57 @@
 // gradle tasks
 // gradle shadowJar
 
-
-// sdk install java 11 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
-
 plugins {
   id 'com.github.johnrengelman.shadow' version '5.2.0'
   id 'java'
 }
 
 apply plugin: 'java'
-apply plugin: 'maven-publish'
 apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'maven'
 
+group = 'com.github.jitpack'
 repositories {
    mavenCentral()
 }
 
-buildscript {
-    repositories {
-         mavenCentral()
-    }
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
-    }
-}
+// sdk install java 11 
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
-dependencies {
-   // libs folder:
-   compile fileTree(dir: 'libs', include: ['*.jar'])
-   //implementation 'com.github.cekvenich:SNX:0.0.1'
-
-}
 sourceSets {e 
    main {
       java { srcDirs = ["src"]}
    }
 }
 
-// Name of this project
-archivesBaseName = 'SNX'
-group = 'org.apache.SNX'
-version = '0.0.1'
-
-// the rest is just publish stuff
-
-// publish task! There are few alternative plugins: gradle-nexus-plugin, maven or maven-publish. I used maven-publish .
-// Also, there is a shadow(to enbale fat jar)adapter that runs on top of maven-publish.
-
-// XX  Trustin Lee
-
-// Read these 7 pages before starting
-// http://imperceptiblethoughts.com/how-to-shadow by John Engelman
-// http://imperceptiblethoughts.com/shadow/publishing/#publishing-with-maven-publish-plugin
-// http://docs.gradle.org/current/userguide/publishing_maven.html#publishing_maven
-
-// http://central.sonatype.org/pages/gradle.html  deprecated
-// http://www.albertgao.xyz/2018/01/18/how-to-publish-artifact-to-maven-central-via-gradle
-
-// sign: https://medium.com/@nmauti/sign-and-publish-on-maven-central-a-project-with-the-new-maven-publish-gradle-plugin-22a72a4bfd4b
-// https://github.com/johnrengelman/shadow/issues/413
-
-// pswd: S_! 123
-// The task first makes a (fat jar), uploads, publish and sign . That publish step is optional, as it can be done manually. 
-
-
-shadowJar {
-   baseName = "SNX"
-   mergeServiceFiles()   // if app: manifest { attributes 'Main-Class': 'org.example.MyMain' }
-   //no classifier means that the shaded jar becomes the default artifact
-   classifier = ''
+repositories {
+  mavenCentral()
 }
-nexusStaging {
-    packageGroup = "org.apache.SNX"
-}
-publishing {
-    publications {
-        shadow(MavenPublication) { publication ->
-            project.shadow.component(publication)
 
-            artifactId = 'SNX'
-            artifact jar
-            artifact shadowJar
+dependencies {
+    // libs folder:
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.google.guava:guava:18.0'
+}
+
+
+// To specify a license in the pom:
+install {
+  repositories.mavenInstaller {
+    pom.project {
+      licenses {
+        license {
+          name 'The Apache Software License, Version 2.0'
+          url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+          distribution 'repo'
         }
+      }
     }
-    repositories {
-        maven {
-            def releasesRepoUrl =  "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-            credentials {
-                username sonataUser
-                password sonataPswd
-            }
-        }
-    }
+  }
 }
 
+wrapper {
+    gradleVersion = "6.0.2"
+    distributionType = Wrapper.DistributionType.ALL
+}
