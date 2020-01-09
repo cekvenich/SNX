@@ -3,12 +3,15 @@
  */
 package del2;
 
-public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
+import org.apache.SNX.db.Del;
 
+
+public class App {
+    App() {
+        new Del().del();
+
+    }
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        new App();
     }
 }
