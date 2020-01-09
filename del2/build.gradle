@@ -1,0 +1,25 @@
+
+plugins {
+    // Apply the java plugin to add support for Java
+    id 'java'
+
+    // Apply the application plugin to add support for building a CLI application.
+    id 'application'
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    // This dependency is used by the application.
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.github.cekvenich:SNX:0.0.9'
+}
+
+application {
+    // Define the main class for the application.
+    mainClassName = 'del2.App'
+}
