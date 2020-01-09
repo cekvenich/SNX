@@ -41,7 +41,7 @@ archivesBaseName = 'SNX'
 group = 'com.github.jitpack'
 // ./gradlew
 // http://sorcersoft.org/project/site/gradle/userguide/artifact_management.html
-jar.enabled = false
+
 tasks.build.dependsOn tasks.shadowJar
 
 artifacts {
@@ -51,7 +51,7 @@ task cleanUp() {
   println 'clean build'
   delete './build'
 }
-defaultTasks 'cleanUp', 'build'
+defaultTasks 'cleanUp', 'install'
 
 // part 2 https://github.com/jitpack/gradle-simple
 // gradle wrapper --gradle-version 6.0.1 --distribution-type all // the gradle wrapper is required 
