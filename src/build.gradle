@@ -23,14 +23,21 @@ repositories {
    mavenCentral()
    maven { url "https://jitpack.io" }
 }
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
 sourceSets {e 
    main {
       java { srcDirs = ["src"]}
    }
 }
 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+dependencies {
+  // libs folder:
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
 shadowJar {
    baseName = 'SNX'
    classifier = ''
@@ -38,9 +45,8 @@ shadowJar {
 }
 // Name of this project
 archivesBaseName = 'SNX'
-group = 'com.github.jitpack'
-// ./gradlew
-// http://sorcersoft.org/project/site/gradle/userguide/artifact_management.html
+
+
 
 tasks.build.dependsOn tasks.shadowJar
 
@@ -53,10 +59,10 @@ defaultTasks 'install'
 // part 2 https://github.com/jitpack/gradle-simple
 // gradle wrapper --gradle-version 6.0.1 --distribution-type all // the gradle wrapper is required 
 // as is jitpack.yaml in root,  not here
-dependencies {
-  // libs folder:
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-}
+
+group = 'com.github.jitpack'
+// ./gradlew
+// http://sorcersoft.org/project/site/gradle/userguide/artifact_management.html
 
 wrapper {
   gradleVersion = "6.0.1"

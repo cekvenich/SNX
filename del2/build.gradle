@@ -1,6 +1,6 @@
 
 plugins {
-    // Apply the java plugin to add support for Java
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
     id 'java'
 
     // Apply the application plugin to add support for building a CLI application.
@@ -9,17 +9,43 @@ plugins {
 
 repositories {
     maven { url 'https://jitpack.io' }
+   mavenCentral()
 }
 
-dependencies {
-    // This dependency is used by the application.
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
-    // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
+dependencies {
     implementation 'com.github.cekvenich:SNX:0.0.12'
+
 }
 
 application {
     // Define the main class for the application.
     mainClassName = 'del2.App'
 }
+
+// Name of this project
+shadowJar {
+   baseName = 'app1'
+   classifier = ''
+   archiveVersion = ''
+}
+archivesBaseName = 'app1'
+
+tasks.build.dependsOn tasks.shadowJar
+
+artifacts {
+    archives shadowJar
+}
+
+task cleanUp() {
+  println 'clean build'
+  delete './build'
+
+}
+
+defaultTasks 'cleanUp', 'build'
+
+
+// to run: java -jar app1.jar
