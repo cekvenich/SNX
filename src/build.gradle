@@ -59,7 +59,6 @@ artifacts {
 task cleanUp() {
   println 'clean build'
   delete './build'
-
 }
 defaultTasks 'cleanUp', 'install'
 
@@ -67,9 +66,10 @@ defaultTasks 'cleanUp', 'install'
 // needs jitpack.yaml in root for java version and gradle for its version
 group = 'com.github.jitpack'
 
-wrapper {
+/* wrapper {
   gradleVersion = "6.0.1"
   distributionType = Wrapper.DistributionType.ALL
-} 
+} */
+
 // push. release. built. test. 
 // eg: http://jitpack.io/#cekvenich/SNX/0.0.12
