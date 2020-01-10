@@ -2,8 +2,6 @@
 plugins {
     id 'com.github.johnrengelman.shadow' version '5.2.0'
     id 'java'
-
-    // Apply the application plugin to add support for building a CLI application.
     id 'application'
 }
 
@@ -16,8 +14,7 @@ sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
 
 dependencies {
-    implementation 'com.github.cekvenich:SNX:0.0.12'
-
+    compile 'com.github.cekvenich:SNX:0.0.14'
 }
 
 application {
@@ -46,5 +43,5 @@ task cleanUp() {
 }
 defaultTasks 'cleanUp', 'build'
 
-
+// ./gradlew build --refresh-dependencies
 // to run: java -jar app1.jar

@@ -3,15 +3,12 @@
  */
 package del2;
 
-import org.apache.SNX.db.Del;
-
+import org.apache.SNX.SNX;
 
 public class App {
-    App() {
-        new Del().del();
 
-    }
     public static void main(String[] args) {
-        new App();
+        System.out.println("hi");
+        new SNX();
     }
 }
