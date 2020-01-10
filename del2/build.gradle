@@ -9,7 +9,7 @@ plugins {
 
 repositories {
     maven { url 'https://jitpack.io' }
-   mavenCentral()
+    mavenCentral()
 }
 
 sourceCompatibility = JavaVersion.VERSION_11
