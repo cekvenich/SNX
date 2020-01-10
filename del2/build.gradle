@@ -44,7 +44,6 @@ task cleanUp() {
   delete './build'
 
 }
-
 defaultTasks 'cleanUp', 'build'
 
 

@@ -1,27 +1,75 @@
+//todo: rest API http://jitpack.io/docs/API
 
+//CONFIG:
+buildscript {
+  repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+  }
+  dependencies {
+    classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
+  }
+}
 plugins {
     id 'com.github.johnrengelman.shadow' version '5.2.0'
     id 'java-library'
 }
-// right click and refresh build gradle
-
+apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'maven'
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
-
 repositories {
 	maven { url 'https://jitpack.io' }
     mavenCentral()
 }
+// in eclipse right click and refresh build gradle
 
+// PROJECT:
+/* sourceSets {e 
+   main {
+      java { srcDirs = ["src"]}
+   }
+}*/
 dependencies {
-    
 	compile group: 'de.neuland-bfi',			name: 'jade4j', 		version: '1.3.0'
 	compile group: 'com.googlecode.json-simple',name: 'json-simple',	version: '1.1.1'
 	compile group: 'commons-dbutils', 			name: 'commons-dbutils',version: '1.7'
 	compile 	   'org.apache.httpcomponents.core5:httpcore5-h2:5.0-beta11'
 	compile group: 'org.xerial', 				name: 'sqlite-jdbc', 	version: '3.30.1'
 	compile group: 'com.github.javafaker',		name: 'javafaker', 		version: '1.0.1'
-    compile 'com.github.blocoio:faker:1.2.8'
-	compile group: 'org.apache.poi', name: 'poi', version: '4.1.1'
+    compile 		'com.github.blocoio:faker:1.2.8'
+	compile group: 'org.apache.poi', 			name: 'poi', 			version: '4.1.1'
+
 	// todo: jsass typescript4j scalia resiliance4j
 }
+
+// BULID:
+// Name of this project
+archivesBaseName = 'SNX'
+shadowJar {
+   baseName = 'SNX'
+   classifier = ''
+   archiveVersion = ''
+}
+tasks.build.dependsOn tasks.shadowJar
+artifacts {
+    archives shadowJar
+}
+task cleanUp() {
+  println 'clean build'
+  delete './build'
+
+}
+defaultTasks 'cleanUp', 'install'
+
+// DEPLOY:
+// needs jitpack.yaml in root for java version and gradle for its version
+group = 'com.github.jitpack'
+
+wrapper {
+  gradleVersion = "6.0.1"
+  distributionType = Wrapper.DistributionType.ALL
+}
+// push. release. built. test. 
+// eg: http://jitpack.io/#cekvenich/SNX/0.0.12
