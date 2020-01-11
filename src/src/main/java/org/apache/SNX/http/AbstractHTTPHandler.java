@@ -21,6 +21,11 @@ import org.apache.hc.core5.http.protocol.HttpContext;
 import org.apache.hc.core5.http.protocol.HttpCoreContext;
 
 //https://hc.apache.org/httpcomponents-core-ga/tutorial/pdf/httpcore-tutorial.pdf
+
+/**
+ * Called by HTTP Server
+ * 
+ */
 public abstract class AbstractHTTPHandler {
 
 	protected void originNotAllowedX(final ClassicHttpResponse response, HttpContext context) throws IOException {
@@ -37,6 +42,7 @@ public abstract class AbstractHTTPHandler {
 	}
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+
 	protected String getDate() {
 		Date date = new Date(System.currentTimeMillis());
 		// Conversion
@@ -44,7 +50,7 @@ public abstract class AbstractHTTPHandler {
 		String text = sdf.format(date);
 		return text;
 	}
-	
+
 	protected void good(final ClassicHttpResponse response, StringEntity body) throws IOException {
 		response.setCode(HttpStatus.SC_OK);
 		response.setHeader("Access-Control-Allow-Origin", "*");
@@ -62,13 +68,18 @@ public abstract class AbstractHTTPHandler {
 	}// ()
 
 	protected void serveAFile(File file, ClassicHttpResponse response, HttpContext context) {
-		response.setHeader("Cache-Control", "public, max-age="+60*60+1+", s-max-age="+60*60);// edge cache one hour but browser 1 second longer
+		response.setHeader("Cache-Control", "public, max-age=" + 60 * 60 + 1 + ", s-max-age=" + 60 * 60);// edge cache
+																											// one hour
+																											// but
+																											// browser 1
+																											// second
+																											// longer
 		HttpCoreContext coreContext = HttpCoreContext.adapt(context);
 		EndpointDetails endpoint = coreContext.getEndpointDetails();
 		response.setCode(HttpStatus.SC_OK);
 		FileEntity body = new FileEntity(file, ContentType.create("text/html", (Charset) null));
 		response.setEntity(body);
-		//System.out.println(endpoint + ": serving file " + file.getPath());
+		// System.out.println(endpoint + ": serving file " + file.getPath());
 	}
 
 }// class

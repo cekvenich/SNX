@@ -15,7 +15,10 @@ import org.apache.hc.core5.http.io.HttpRequestHandler;
 import org.apache.hc.core5.http.io.SocketConfig;
 import org.apache.hc.core5.util.TimeValue;
 
-public class MainHttpServer {
+/**
+ * Http Server based on Apache Core v5+. Needs a handler.
+ */
+public class DefaultMainHttpServer {
 
 	static Log LOG = LogFactory.getLog(MethodHandles.lookup().lookupClass());
 
@@ -25,7 +28,7 @@ public class MainHttpServer {
 
 	HttpRequestHandler _handler;
 
-	public MainHttpServer(HttpRequestHandler handler) {
+	public DefaultMainHttpServer(HttpRequestHandler handler) {
 		_handler = handler;
 	}
 

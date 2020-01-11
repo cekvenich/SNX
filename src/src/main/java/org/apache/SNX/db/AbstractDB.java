@@ -7,11 +7,15 @@ import java.util.Map;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 
+// todo: add pool
 public class AbstractDB {
 
 	static QueryRunner _srun = new QueryRunner();
 
-	// todo: add pool
+	/**
+	 * 
+	 * Read
+	 */
 	public List<Map<String, Object>> read(Connection con, StringBuilder sql, Object... args) throws Throwable {
 
 		MapListHandler handler = new MapListHandler();
@@ -22,7 +26,7 @@ public class AbstractDB {
 	}// ()
 
 	/**
-	 * Use for the bulk writes|inserts, needs a commit on con todo: needs a pool
+	 * Use for the bulk writes|inserts, needs a commit on con
 	 */
 	public synchronized void write(Connection con, StringBuilder sql, Object... args) throws Throwable {
 		MapListHandler handler = new MapListHandler();

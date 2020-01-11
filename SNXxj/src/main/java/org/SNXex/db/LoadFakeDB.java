@@ -1,4 +1,4 @@
-package org.apache.ex.db;
+package org.SNXex.db;
 
 import java.lang.invoke.MethodHandles;
 import java.sql.Connection;
@@ -12,27 +12,27 @@ import io.bloco.faker.Faker;
 public class LoadFakeDB {
 	static Log LOG = LogFactory.getLog(MethodHandles.lookup().lookupClass());
 
-	public LoadFakeDB(DB db) {
+	public LoadFakeDB(DBS db) {
 		LOG.info("oh hi log");
 		_mdb = db;		
 	}
 
-	DB _mdb;
+	DBS _mdb;
 	static Faker _faker = new Faker();
 
 	static StringBuilder _ins = new StringBuilder(
 		"INSERT INTO tab1(fullName, city, ip, dateOfPurch, cc, dept, price) VALUES(" + "?,?,? ,?,?,?,?" + ")");
 
 	public void loadDB() throws Throwable {
-		StringBuilder tab = new StringBuilder(
-			"CREATE TABLE tab1(" + "fullName VARCHAR(40), postcode VARCHAR(15), city VARCHAR(25), ip VARCHAR(20), "
+		StringBuilder createTab1 = new StringBuilder(
+			"CREATE TABLE tab1( fullName VARCHAR(40), postcode VARCHAR(15), city VARCHAR(25), ip VARCHAR(20), "
 				+ "dateOfPurch DATE,"
 				+ "cc VARCHAR(25), dept VARCHAR(40), price DECIMAL(10,2)" 
 				+ ");");
 		
 		// create schema
 		Connection con = _mdb.begin();
-		_mdb.write(con,tab);
+		_mdb.write(con,createTab1);
 		con.commit();
 		
 		System.out.println(_mdb.read(con, new StringBuilder("SELECT COUNT(*) AS c FROM tab1")));
@@ -41,6 +41,11 @@ public class LoadFakeDB {
 		insert1MilsLoop(3); // 3 times a million = 3 million
 	}// ()
 
+	public boolean tab1Exists() {
+	
+		return true;
+	}
+	
 	public void insert1MilsLoop(int count) throws Throwable {
 		count = count * 10;
 		for (int j = 1; j <= count; j++) {

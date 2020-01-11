@@ -1,4 +1,4 @@
-package org.apache.ex.db;
+package org.SNXex.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,17 +11,20 @@ import org.sqlite.SQLiteConfig.SynchronousMode;
 import org.sqlite.SQLiteConfig.TempStore;
 
 /**
- * Warper for MonetDB
+ * Warper for SQL-ite
  */
-public class DB extends AbstractDB {
+public class DBS extends AbstractDB {
 
 	static Connection _conW;
 
 	/**
+		_db = new DB(5000, ":memory:"); // for memory DB (RAM)
+		_db = new DBS(5000, "/home/db/sdb.db"); // or file path if using file
+	 * 
 	 * @param cacheSize eg 25000 ~ 100 meg in 4K pages
 	 * @param db :memory: for RAM or file path
 	 */
-	public DB(int cacheSize, String db) throws Throwable {
+	public DBS(int cacheSize, String db) throws Throwable {
 		SQLiteConfig configW = new SQLiteConfig();
 		configW.setCacheSize(cacheSize);
 		configW.setBusyTimeout(120 * 1000);

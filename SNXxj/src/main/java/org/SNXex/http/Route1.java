@@ -1,12 +1,12 @@
-package org.apache.ex.http;
+package org.SNXex.http;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.SNXex.db.DBS;
 import org.apache.SNX.http.IRoute;
-import org.apache.ex.db.DB;
 import org.json.simple.JSONArray;
 
 public class Route1 implements IRoute {
@@ -19,7 +19,7 @@ public class Route1 implements IRoute {
 	/**
 	 * @param db pass in DB
 	 */
-	public Route1(DB db) {
+	public Route1(DBS db) {
 		_mdb = db;
 		_thiz = this;
 	}
@@ -28,7 +28,7 @@ public class Route1 implements IRoute {
 		return _thiz;
 	}
 
-	static DB _mdb;
+	static DBS _mdb;
 
 	/**
 	 * Will return JSON

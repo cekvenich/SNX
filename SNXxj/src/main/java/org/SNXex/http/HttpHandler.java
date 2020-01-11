@@ -1,4 +1,4 @@
-package org.apache.ex.http;
+package org.SNXex.http;
 
 import java.io.File;
 import java.io.IOException;

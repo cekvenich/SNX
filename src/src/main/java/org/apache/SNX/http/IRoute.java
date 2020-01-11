@@ -3,7 +3,7 @@ package org.apache.SNX.http;
 import java.util.Map;
 
 /**
- * Controller and Action
+ * Controller and Action. Called by Handler
  */
 public interface IRoute {
 

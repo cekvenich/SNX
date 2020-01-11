@@ -2,6 +2,10 @@ package org.apache.SNX.db;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Timer. Copied from WWW
+ *
+ */
 public class Timer {
 	long starts;
 
