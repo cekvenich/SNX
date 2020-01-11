@@ -4,16 +4,16 @@ import org.apache.SNX.SNX;
 
 public class DBApp {
 
-	static DBS _db;
+	static DBS _mdb;
 
 	public static void main(String[] args) throws Throwable {
 
 		new SNX();
 
-		//_db = new DB(5000, ":memory:"); // for memory
-		_db = new DBS(5000, "/home/vic/db/sdb.db"); // or file path if not using RAM
+		_mdb = new DBS(5000, ":memory:"); // for memory
+		_mdb = new DBS(5000, "/home/vic/db/sdb.db"); // or file path if not using RAM
 
-		new LoadFakeDB(_db).loadDB(); // load fake data 
+		new LoadFakeDB(_mdb).loadDB(); // load fake data 
 	}
 
 	public void other() {
