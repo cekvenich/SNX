@@ -68,7 +68,7 @@ public class DBS extends AbstractDB {
 			sql.append(table);
 			LOG.info(sql);
 			Connection con = db.begin();
-			List<Map<String, Object>> row = db.read(null, sql);
+			List<Map<String, Object>> row = db.read(con, sql);
 			con.commit();
 			if (row.size() != 1)
 				return false;
