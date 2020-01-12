@@ -14,7 +14,7 @@ public class MainTests {
 		 WebClient bro = new WebClient(BrowserVersion.CHROME);
 		 bro.getOptions().setJavaScriptEnabled(true);
 		 bro.setAjaxController(new NicelyResynchronizingAjaxController());
-		HtmlPage page = bro.getPage("http://htmlunit.sourceforge.net");
+		HtmlPage page = bro.getPage("http://localhost:8888/tests/index.html");
 		
 		page.executeJavaScript("");
 		
