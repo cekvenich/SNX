@@ -14,6 +14,8 @@ pro.then(function(){
    new TestVM1()
 })//pro
 
+var htmlUnitVar = null
+
 class TestVM1 {
    static _done1
    static _assert
@@ -27,6 +29,7 @@ class TestVM1 {
          console.log('in test:')
          new UserVM(function(json){
             console.log(json)
+            htmlUnitVar = json
             TestVM1._assert.ok(true) //passed. Should check json.
             TestVM1._done1()
          })

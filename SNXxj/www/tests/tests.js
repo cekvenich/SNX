@@ -5,6 +5,7 @@ pro.then(function () {
     QUnit.start();
     new TestVM1();
 });
+var htmlUnitVar = null;
 var TestVM1 = (function () {
     function TestVM1() {
         depp.define({ 'vm1': '/api/UserVM.js' });
@@ -15,6 +16,7 @@ var TestVM1 = (function () {
             console.log('in test:');
             new UserVM(function (json) {
                 console.log(json);
+                htmlUnitVar = json;
                 TestVM1._assert.ok(true);
                 TestVM1._done1();
             });
