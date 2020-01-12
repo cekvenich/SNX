@@ -62,12 +62,14 @@ class LoadFakeDB(var _mdb: DBS) {
       var i: Int = 1
       while (i <= 100) {
         insIn(1000) 
+        i = i + 1
       }
       println(" +100K in " + watch.time())
       val con: Connection = _mdb.begin()
       println(
         _mdb.read(con,  new java.lang.StringBuilder("SELECT COUNT(*) AS cout FROM tab1")))
       con.commit() 
+      j = j + 1
     }
   }
 
@@ -87,6 +89,7 @@ class LoadFakeDB(var _mdb: DBS) {
         _faker.commerce.department().toString, // DECIMAL
         _faker.commerce.price()
       ) 
+      i = i + 1
     }
     con.commit()
   }
