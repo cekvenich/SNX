@@ -1,13 +1,10 @@
-
-// CONFIG:
+//CONFIG:
 ///////////////////////////////////////////////////////////////////////////////////////////
 plugins {
-    id 'scala'
-    id 'eclipse'
+    id 'java'
     id 'application'
 }
-
-// to config IDE $ gradle eclipse 
+// run$ gradle eclipse 
 repositories {
     maven { url 'https://jitpack.io' }
     mavenCentral()
@@ -17,45 +14,30 @@ targetCompatibility = JavaVersion.VERSION_11
 
 // PROJECT:
 ///////////////////////////////////////////////////////////////////////////////////////////
-/*
-sourceSets {e 
+/* sourceSets {e 
    main {
-      scala { srcDirs = ["src/main/scala"]}
+      java { srcDirs = ["src"]}
    }
-}
-*/
+}*/
 
 dependencies {
-    implementation 'org.scala-lang:scala-library:2.13.1'
     implementation 'com.github.cekvenich:SNX:0.0.15'
+	implementation group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.13'
+	implementation group: 'com.google.truth', name: 'truth', version: '1.0'
+    
 }
 application {
-    mainClassName = 'DBApp'
+    // Define the main class for the application.
+    mainClassName = 'MainTest'
 }
 
-//BUILD:
+// BULID:
 ///////////////////////////////////////////////////////////////////////////////////////////
-jar {
-    manifest {
-        attributes( "Main-Class":'DBApp')
-    }
-    zip64 = true
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-    exclude("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA")
-}
-
 task cleanUp() {
   println 'clean build'
   delete './build'
 }
-defaultTasks 'cleanUp', 'compileScala', 'build', 'run'
+defaultTasks 'cleanUp', 'build'
 
-/* wrapper {
-  gradleVersion = "6.0.1"
-} */
-
-//  ./gradlew --stop
-// ./gradlew build --refresh-dependencies./gr
+// ./gradlew build --refresh-dependencies
 // to run: java -jar app1.jar

@@ -1,6 +1,7 @@
 //todo: rest API http://jitpack.io/docs/API
 
 //CONFIG:
+///////////////////////////////////////////////////////////////////////////////////////////
 buildscript {
   repositories {
     mavenCentral()
@@ -29,6 +30,7 @@ targetCompatibility = JavaVersion.VERSION_11
 // in eclipse right click and refresh build gradle
 
 // PROJECT:
+///////////////////////////////////////////////////////////////////////////////////////////
 /* sourceSets {e 
    main {
       java { srcDirs = ["src"]}
@@ -48,6 +50,7 @@ dependencies {
 	// todo: jsass typescript4j scalia resiliance4j dns load javadoc
 
 // BULID:
+///////////////////////////////////////////////////////////////////////////////////////////
 // Name of this project
 archivesBaseName = 'SNX'
 shadowJar {
@@ -66,6 +69,7 @@ task cleanUp() {
 defaultTasks 'cleanUp', 'install'
 
 // DEPLOY:
+///////////////////////////////////////////////////////////////////////////////////////////
 // needs jitpack.yaml in root for java version and gradle for its version
 group = 'com.github.jitpack'
 

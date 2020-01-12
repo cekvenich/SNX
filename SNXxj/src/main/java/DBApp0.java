@@ -2,7 +2,7 @@ import org.SNXex.db.DBS;
 import org.SNXex.db.LoadFakeDB;
 import org.apache.SNX.SNX;
 
-public class DBApp {
+public class DBApp0 {
 
 	static DBS _mdb;
 
