@@ -64,17 +64,19 @@ public class DBS extends AbstractDB {
 	 */
 	public boolean tableExists(DBS db, String table) {
 		try {
-			StringBuilder sql = new StringBuilder("SELECT name FROM sqlite_master WHERE type=\'table\' AND name=");
+			StringBuilder sql = new StringBuilder("SELECT name FROM sqlite_master WHERE type='table' AND name='");
 			sql.append(table);
+			sql.append("'");
 			LOG.info(sql);
 			Connection con = db.begin();
-			List<Map<String, Object>> row = db.read(con, sql);
+			List<Map<String, Object>> rows = db.read(con, sql);
 			con.commit();
-			if (row.size() != 1)
+			LOG.info(rows);
+			if (rows.size() != 1)
 				return false;
 			return true;
 		} catch (Throwable err) {
-			LOG.debug(err);
+			LOG.info(err);
 			return false;
 		}
 	}

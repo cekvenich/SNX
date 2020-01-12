@@ -29,12 +29,14 @@ public class LoadFakeDB {
 						+ "dateOfPurch DATE," + "cc VARCHAR(25), dept VARCHAR(40), price DECIMAL(10,2)" + ");");
 
 		Connection con;
+
 		if(!_mdb.tableExists(_mdb, "tab1")) {
-		// create schema
-		con = _mdb.begin();
-		_mdb.write(con, createTab1);
-		con.commit();
+			// create schema
+			con = _mdb.begin();
+			_mdb.write(con, createTab1);
+			con.commit();
 		}
+		
 		
 		con = _mdb.begin();
 		System.out.println(_mdb.read(con, new StringBuilder("SELECT COUNT(*) AS c FROM tab1")));

@@ -12,15 +12,15 @@ repositories {
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
 
-
 // PROJECT:
 /* sourceSets {e 
    main {
       java { srcDirs = ["src"]}
    }
 }*/
+
 dependencies {
-    compile 'com.github.cekvenich:SNX:0.0.15'
+    implementation 'com.github.cekvenich:SNX:0.0.15'
 }
 application {
     // Define the main class for the application.

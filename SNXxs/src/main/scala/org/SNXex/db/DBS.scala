@@ -28,8 +28,6 @@ import org.sqlite.SQLiteConfig.TempStore
 
 import DBS._
 
-//remove if not needed
-import scala.collection.JavaConversions._
 
 object DBS {
 
@@ -84,17 +82,19 @@ class DBS /**
   def tableExists(db: DBS, table: String): Boolean =
     try {
       val sql: StringBuilder = new StringBuilder(
-        "SELECT name FROM sqlite_master WHERE type=\'table\' AND name=")
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='")
       sql.append(table)
+      sql.append("'")
       LOG.info(sql)
       val con: Connection = db.begin()
-      val row: java.util.List[java.util.Map[String, Object]] = db.read(con, new java.lang.StringBuilder(sql))
+      val rows: java.util.List[java.util.Map[String, Object]] = db.read(con, new java.lang.StringBuilder(sql))
       con.commit()
-      if (row.size != 1) false
+      LOG.info(rows)
+      if (rows.size != 1) false
       true
     } catch {
       case err: Throwable => {
-        LOG.debug(err)
+        LOG.info(err)
         false
       }
 

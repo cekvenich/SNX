@@ -14,8 +14,6 @@ import io.bloco.faker.Faker
 
 import LoadFakeDB._
 
-//remove if not needed
-import scala.collection.JavaConversions._
 
 object LoadFakeDB {
 
@@ -41,7 +39,7 @@ class LoadFakeDB(var _mdb: DBS) {
         ");")
     var con: Connection = null
     if (!_mdb.tableExists(_mdb, "tab1")) {
-// create schema
+      // create schema
       con = _mdb.begin()
       _mdb.write(con, new java.lang.StringBuilder(createTab1))
       con.commit()
@@ -50,7 +48,7 @@ class LoadFakeDB(var _mdb: DBS) {
     println(
       _mdb.read(con,  new java.lang.StringBuilder("SELECT COUNT(*) AS c FROM tab1")))
     con.commit()
-// 3 times a million = 3 million
+    // 3 times a million = 3 million
     insert1MilsLoop(3)
   }
 
@@ -64,15 +62,12 @@ class LoadFakeDB(var _mdb: DBS) {
       var i: Int = 1
       while (i <= 100) {
         insIn(1000) 
-         i += 1;
-         i - 1 
       }
       println(" +100K in " + watch.time())
       val con: Connection = _mdb.begin()
       println(
         _mdb.read(con,  new java.lang.StringBuilder("SELECT COUNT(*) AS cout FROM tab1")))
       con.commit() 
-       j += 1; j - 1 
     }
   }
 
@@ -92,8 +87,6 @@ class LoadFakeDB(var _mdb: DBS) {
         _faker.commerce.department().toString, // DECIMAL
         _faker.commerce.price()
       ) 
-      i += 1; 
-      i - 1 
     }
     con.commit()
   }

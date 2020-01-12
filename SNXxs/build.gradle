@@ -11,6 +11,8 @@ repositories {
     maven { url 'https://jitpack.io' }
     mavenCentral()
 }
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
 // PROJECT:
 /*
@@ -20,18 +22,19 @@ sourceSets {e
    }
 }
 */
+
 dependencies {
-    compile group: 'org.scala-lang', name: 'scala-library', version: '2.13.1'
-    compile 'com.github.cekvenich:SNX:0.0.15'
+    implementation 'org.scala-lang:scala-library:2.13.1'
+    implementation 'com.github.cekvenich:SNX:0.0.15'
 }
 application {
-    mainClassName = 'Main'
+    mainClassName = 'DBApp'
 }
 
 //BUILD:
 jar {
     manifest {
-        attributes( "Main-Class":'Main')
+        attributes( "Main-Class":'DBApp')
     }
     zip64 = true
     from {
