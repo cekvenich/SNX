@@ -48,8 +48,8 @@ public class MainTests {
 		System.out.println("Actual caps: " + actualCaps);
 		System.out.println("Starting XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
-		String url = "http://localhost:8090";// "http://localhost:8888/tests/index.html";
-		driver.get(url); // navigate().to(url);
+		String url = "http://localhost:8888/tests/index.html";
+		driver.get(url); 
 		
 		Thread.sleep(100);
 		System.out.println(driver.getTitle());
