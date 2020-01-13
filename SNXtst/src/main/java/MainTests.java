@@ -2,8 +2,11 @@ import java.util.List;
 import java.util.logging.Level;
 
 import org.apache.SNX.SNX;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.HasCapabilities;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -32,25 +35,42 @@ public class MainTests {
 
 		// options.setHeadless(true);
 		LoggingPreferences logPrefs = new LoggingPreferences();
-		logPrefs.enable(LogType.BROWSER, Level.WARNING);
-		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
+		logPrefs.enable(LogType.BROWSER, Level.ALL);
+		logPrefs.enable(LogType.PERFORMANCE, Level.INFO);
+		logPrefs.enable(LogType.PROFILER, Level.INFO);
+		
 		options.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
 
 		WebDriver driver = new ChromeDriver(options);
-		new ChromeDriver();
+		JavascriptExecutor jse = (JavascriptExecutor) driver;  
+
 		Capabilities actualCaps = ((HasCapabilities) driver).getCapabilities();
 		System.out.println("Actual caps: " + actualCaps);
 		System.out.println("Starting XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
-		String url = "http://www.google.com";// "http://localhost:8888/tests/index.html";
+		String url = "http://localhost:8090";// "http://localhost:8888/tests/index.html";
 		driver.get(url); // navigate().to(url);
 		
+		Thread.sleep(100);
 		System.out.println(driver.getTitle());
 		
+		StringBuilder foo = new StringBuilder("var callback = arguments[arguments.length - 1];"
+				+ "webDriverFoo(callback)");
+
+		/*
+		 https://javadoc.io/doc/org.seleniumhq.selenium/selenium-api/latest/org/openqa/selenium/JavascriptExecutor.html#executeScript(java.lang.String,java.lang.Object...)
+		 */
+		Object response = jse.executeAsyncScript(foo.toString(),"123");
+
+		System.out.println(response);
+
+		//JSONObject json = (JSONObject) new JSONParser().parse((String) response);
+		//System.out.println(json);
 		
 		System.out.println("Ending: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 		Logs logs = driver.manage().logs();
-		List<LogEntry> perfLogEntries = logs.get(LogType.PERFORMANCE).getAll();
+		
+		List<LogEntry> perfLogEntries = logs.get(LogType.BROWSER).getAll();
 		System.out.println(perfLogEntries);
 
 	}

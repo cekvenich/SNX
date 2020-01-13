@@ -1,0 +1,15 @@
+head
+body
+    p oh hi
+    script.  
+        function webDriverFoo(WDcb) {
+            console.log( arguments.length )
+            console.log('foo')
+            setTimeout(function(){
+                console.log('w')
+                WDcb('bla')
+            }
+            ,500)
+            
+        }//
+        //webDriverFoo()
