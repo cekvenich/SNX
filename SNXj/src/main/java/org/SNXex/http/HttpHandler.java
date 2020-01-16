@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.SNX.http.AbstractHTTPHandler;
-import org.apache.SNX.http.IRoute;
+import org.apache.SNX.IRoute;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hc.core5.http.ClassicHttpRequest;

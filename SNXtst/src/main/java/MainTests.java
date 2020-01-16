@@ -1,6 +1,5 @@
 import java.util.List;
 
-import org.SNX.tst.SelUtil;
 import org.apache.SNX.SNX;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.HasCapabilities;

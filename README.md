@@ -1,7 +1,7 @@
 
 # Java SNX
+( pronounced Snax, original idea is Spark Next) 
 
-( pronounced Snax) 
+Next version of Spark, Spring, Akka, etc. is simpler, faster, easier. 
 
-Next version of Spark, Spring, Akka, etc.
-
+With Scala and Java libs.

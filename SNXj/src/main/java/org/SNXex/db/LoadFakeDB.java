@@ -3,7 +3,7 @@ package org.SNXex.db;
 import java.lang.invoke.MethodHandles;
 import java.sql.Connection;
 
-import org.apache.SNX.db.Timer;
+import org.apache.SNX.tst.Timer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

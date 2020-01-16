@@ -6,7 +6,7 @@ import org.SNXex.db.DBS;
 import org.SNXex.http.HttpHandler;
 import org.SNXex.http.Route1;
 import org.apache.SNX.SNX;
-import org.apache.SNX.http.IRoute;
+import org.apache.SNX.IRoute;
 import org.apache.SNX.http.DefaultMainHttpServer;
 
 public class SrvApp {
