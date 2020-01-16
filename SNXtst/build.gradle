@@ -21,10 +21,8 @@ targetCompatibility = JavaVersion.VERSION_11
 }*/
 
 dependencies {
-    implementation 'com.github.cekvenich:SNX:0.0.15'
-	implementation group: 'com.google.truth', name: 'truth', version: '1.0'
-		
-	implementation group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '4.0.0-alpha-4'
+    implementation 'com.github.cekvenich:SNX:0.0.100'
+
 	
     
 }

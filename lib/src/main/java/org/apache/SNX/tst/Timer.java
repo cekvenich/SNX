@@ -1,4 +1,4 @@
-package org.apache.SNX.db;
+package org.apache.SNX.tst;
 
 import java.util.concurrent.TimeUnit;
 

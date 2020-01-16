@@ -3,9 +3,11 @@ package org.apache.SNX;
 public class SNX {
 
 	/**
-	 * Just print out some version or info
+	 * Just print out some version / info
 	 */
-	public SNX() {
-		System.out.println("SNX");
+	public String getSNX() {
+		String ver = "v.0.0.x";
+		System.out.println(ver);
+		return ver;
 	}
 }

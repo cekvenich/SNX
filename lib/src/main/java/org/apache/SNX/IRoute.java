@@ -1,4 +1,4 @@
-package org.apache.SNX.http;
+package org.apache.SNX;
 
 import java.util.Map;
 
@@ -18,7 +18,7 @@ public interface IRoute {
 	IRoute getInst();
 
 	/**
-	 * Take in http args and return HTTP, or JSON, or such
+	 * Take in 'http' args and return HTTP String, or JSON, or such
 	 */
 	String ret(Map qs);
 }

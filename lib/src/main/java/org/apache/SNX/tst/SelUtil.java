@@ -1,4 +1,4 @@
-package org.SNX.tst;
+package org.apache.SNX.tst;
 
 import java.util.List;
 import java.util.logging.Level;
