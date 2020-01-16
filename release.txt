@@ -1,0 +1,4 @@
+
+- Push to github, release.
+- Go to jitpack, make
+- Use.
