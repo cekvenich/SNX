@@ -15,7 +15,7 @@ public class Pug {
 	public Pug() throws Throwable {
 
 		String cwd = System.getProperty("user.dir");
-		TemplateLoader loader = new FileTemplateLoader(cwd+"/routes/", "UTF-8");
+		TemplateLoader loader = new FileTemplateLoader(cwd + "/routes/", "UTF-8");
 		_render.setTemplateLoader(loader);
 		_render.setCaching(false);
 
@@ -23,7 +23,7 @@ public class Pug {
 
 		Map<String, Object> model1 = new HashMap<String, Object>();
 		model1.put("city", "Bremen");
-		
+
 		String html = _render.renderTemplate(template1, model1);
 		System.out.println(html);
 

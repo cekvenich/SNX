@@ -49,7 +49,8 @@ public class DBS extends AbstractDB {
 	}// ()
 
 	/**
-	 *  Make sure you finally commit the connection you get here
+	 * Make sure you finally commit the connection you get here
+	 * 
 	 * @return Connection
 	 */
 	public Connection begin() throws Throwable {
@@ -60,7 +61,7 @@ public class DBS extends AbstractDB {
 	}
 
 	/**
-		Does the table exists?
+	 * Does the table exists?
 	 */
 	public boolean tableExists(DBS db, String table) {
 		try {

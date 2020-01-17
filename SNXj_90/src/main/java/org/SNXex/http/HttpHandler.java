@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.SNX.http.AbstractHTTPHandler;
 import org.apache.SNX.IRoute;
+import org.apache.SNX.http.AbstractHTTPHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hc.core5.http.ClassicHttpRequest;
@@ -41,7 +41,7 @@ public class HttpHandler extends AbstractHTTPHandler implements HttpRequestHandl
 
 		try {
 			// LOG.info(req.getHeader("Origin").toString());
-			resp.setHeader("x-intu-ts", this.getDate() );
+			resp.setHeader("x-intu-ts", this.getDate());
 
 			String PATH = req.getPath();
 			int ppos = PATH.indexOf('?');
@@ -60,9 +60,10 @@ public class HttpHandler extends AbstractHTTPHandler implements HttpRequestHandl
 				return;
 			}
 			// end File in docRoot
-			
+
 			// API cache
-		    resp.setHeader("Cache-Control", "public, max-age="+1+", s-max-age="+1);// edge cache for browser and CDN
+			resp.setHeader("Cache-Control", "public, max-age=" + 1 + ", s-max-age=" + 1);// edge cache for browser and
+																							// CDN
 			// start qs
 			String url = req.getRequestUri();
 			int upos = url.indexOf('?');
@@ -96,7 +97,7 @@ public class HttpHandler extends AbstractHTTPHandler implements HttpRequestHandl
 			good(resp, outgoingEntity);
 
 		} catch (Exception e) {
-			LOG.error("Handler:"+ e.toString());
+			LOG.error("Handler:" + e.toString());
 
 			// err response
 			// /////////////////////////////////////////////////////////////////////////////////////////////
