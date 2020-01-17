@@ -1,0 +1,16 @@
+
+node_modules/
+**/*lock.json
+/.gradle/
+/build/
+bin/
+
+dist/
+out/
+workspace.xml
+
+**/*.log
+
+.settings/
+/gradle.properties
+/mysec.gpg

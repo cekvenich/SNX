@@ -1,4 +1,4 @@
-package org.apache.SNX.tst;
+package org.apache.SNX.util;
 
 import java.util.concurrent.TimeUnit;
 
@@ -6,18 +6,18 @@ import java.util.concurrent.TimeUnit;
  * Timer. Copied from WWW
  *
  */
-public class Timer {
+public class TimerU {
 	long starts;
 
-	public static Timer start() {
-		return new Timer();
+	public static TimerU start() {
+		return new TimerU();
 	}
 
-	private Timer() {
+	private TimerU() {
 		reset();
 	}
 
-	public Timer reset() {
+	public TimerU reset() {
 		starts = System.currentTimeMillis();
 		return this;
 	}

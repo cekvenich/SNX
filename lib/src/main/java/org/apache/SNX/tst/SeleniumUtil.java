@@ -12,7 +12,7 @@ import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.logging.Logs;
 import org.openqa.selenium.remote.CapabilityType;
 
-public class SelUtil {
+public class SeleniumUtil {
 
 	ChromeOptions _options;
 
@@ -25,7 +25,7 @@ public class SelUtil {
 	 * @param chromedriverPath eg
 	 *                         "/home/vic/Downloads/chromedriver_linux64/chromedriver"
 	 */
-	public SelUtil(String chromedriverPath) {
+	public SeleniumUtil(String chromedriverPath) {
 
 		System.setProperty("webdriver.chrome.driver", chromedriverPath);
 	}

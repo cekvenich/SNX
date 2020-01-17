@@ -19,7 +19,6 @@ public class Pug {
 		_render.setTemplateLoader(loader);
 		_render.setCaching(false);
 
-		
 		JadeTemplate template1 = _render.getTemplate("index.pug");
 
 		Map<String, Object> model1 = new HashMap<String, Object>();
