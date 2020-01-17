@@ -1,4 +1,4 @@
-package org.SNX;
+package org.apache.SNX;
 
 public class SNX {
 
@@ -6,7 +6,7 @@ public class SNX {
 	 * Just print out some version / info
 	 */
 	public String getSNX() {
-		String ver = "v.0.0.x";
+		String ver = "V: 0.0.102";
 		System.out.println(ver);
 		return ver;
 	}

@@ -11,13 +11,13 @@ You should check the features and note there as this here is just a port.
 - https://github.com/INTUITION-dev/INTU
 
 
-### Server-side: run Main.java
+### Server side: run Main.java
 
 To start the java service, run the Main.java. One way to do that is to import this project into Eclipse IDE.
 It is a stand alone http server based on
  https://hc.apache.org/httpcomponents-core-5.0.x and there is no Tomcat or container of any kind.
 
-## Client-side
+## Client side
 
 Of course Java does not run front-end, so you have to run the browser side as javascript from the http-rpc+/web folder, and index.html ( https://github.com/INTUITION-dev/mbToolBelt/tree/master/http-rpc%2B/web )
 

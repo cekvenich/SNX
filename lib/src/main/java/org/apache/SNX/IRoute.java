@@ -1,4 +1,4 @@
-package org.SNX;
+package org.apache.SNX;
 
 import java.util.Map;
 
