@@ -1,4 +1,4 @@
-package org.SNXex.db
+package org.SNXa.db
 
 import java.lang.invoke.MethodHandles
 

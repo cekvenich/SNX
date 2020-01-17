@@ -1,4 +1,4 @@
-package org.apache.SNX.Browser;
+package org.SNX.Browser;
 
 import java.net.URI;
 import java.net.http.HttpClient;

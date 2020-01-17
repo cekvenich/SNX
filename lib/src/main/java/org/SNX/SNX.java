@@ -1,4 +1,4 @@
-package org.apache.SNX;
+package org.SNX;
 
 public class SNX {
 

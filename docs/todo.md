@@ -3,6 +3,13 @@
 - Stress test, executors, http client
 - Reactive 
 
+S3
+
+BigData
+
+
+	// todo: jsass typescript4j scalia resiliance4j dns load javadoc
+
 
 https://github.com/cekvenich/topseed-loadgen/blob/master/src/org/load/DefaultTestRunner.java
 
