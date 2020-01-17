@@ -2,4 +2,4 @@ jdk:
   - openjdk11
 
 before_install:
-   - cd lib
+  - cd deleted
