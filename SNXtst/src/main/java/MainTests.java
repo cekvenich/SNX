@@ -15,7 +15,7 @@ public class MainTests {
 
 		new SNX();
 
-		SelUtil d = new SelUtil("/home/vic/Downloads/chromedriver_linux64/chromedriver");
+		SeleniumUtil d = new SeleniumUtil("/home/vic/Downloads/chromedriver_linux64/chromedriver");
 		ChromeOptions options = d.getOptions();
 
 		ChromeDriver driver = d.getDriver(options);

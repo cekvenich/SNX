@@ -7,7 +7,7 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.util.concurrent.Callable;
 
-import org.apache.SNX.tst.Timer;
+import org.apache.SNX.util.TimerU;
 
 public class Browser implements Callable<Object> { 
 
@@ -21,7 +21,7 @@ public class Browser implements Callable<Object> {
 
 
 public Long call() throws Exception {
-	Timer t = Timer.start();	
+	TimerU t = TimerU.start();	
 	
 	String resp = GET(_uri);
 	

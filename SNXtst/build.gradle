@@ -21,7 +21,7 @@ targetCompatibility = JavaVersion.VERSION_11
 }*/
 
 dependencies {
-    implementation 'com.github.cekvenich:SNX:0.0.101'
+    implementation 'com.github.cekvenich:SNX:0.0.102'
 
 	
     

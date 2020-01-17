@@ -4,7 +4,7 @@ import java.lang.invoke.MethodHandles
 
 import java.sql.Connection
 
-import org.apache.SNX.tst.Timer
+import org.apache.SNX.util.TimerU
 
 import org.apache.commons.logging.Log
 
@@ -56,7 +56,7 @@ class LoadFakeDB(var _mdb: DBS) {
     val count = c * 10
     var j: Int = 1
     while (j <= count) {
-      val watch: Timer = Timer.start()
+      val watch: TimerU = TimerU.start()
       // 100K
       System.out.print("outer loop " + j + ":")
       var i: Int = 1
