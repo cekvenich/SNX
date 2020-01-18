@@ -12,7 +12,7 @@ public class Pug {
 
 	static JadeConfiguration _render = new JadeConfiguration();
 
-	public Pug() throws Throwable {
+	public String Pug() throws Throwable {
 
 		String cwd = System.getProperty("user.dir");
 		TemplateLoader loader = new FileTemplateLoader(cwd + "/routes/", "UTF-8");
@@ -26,6 +26,7 @@ public class Pug {
 
 		String html = _render.renderTemplate(template1, model1);
 		System.out.println(html);
+		return html;
 
 	}
 }

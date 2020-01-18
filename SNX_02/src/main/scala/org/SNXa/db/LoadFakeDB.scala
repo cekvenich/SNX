@@ -12,11 +12,10 @@ import org.apache.commons.logging.LogFactory
 
 import io.bloco.faker.Faker
 
-import LoadFakeDB._
 
+class LoadFakeDB(var _mdb: DBS) {
 
-object LoadFakeDB {
-
+  
   var LOG: Log = LogFactory.getLog(MethodHandles.lookup().lookupClass())
 
   var _faker: Faker = new Faker()
@@ -25,9 +24,6 @@ object LoadFakeDB {
     "INSERT INTO tab1(fullName, city, ip, dateOfPurch, cc, dept, price) VALUES(" +
       "?,?,? ,?,?,?,?" +
       ")")
-}
-
-class LoadFakeDB(var _mdb: DBS) {
 
   LOG.info("oh hi log")
 

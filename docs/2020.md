@@ -182,12 +182,44 @@ Here is the call to QUnit from Selenium.
 
 ## #9: SSR (Server Side Rendering) with Pug
 
+We used to use PHP, ASP, JSP for SSR, heck 1/3 of WWW is PHP.
+But here is what we use in NodeJS, something more moderm:
 
-### Like NodeJS's Express
-PHP ASP JSP
+
+![](expressjs.gif)
+
+And in Java/Scala we can do this:
+
+```
+   var _render: JadeConfiguration = new JadeConfiguration()
+
+  def Pug(): String = {
+    val cwd: String = System.getProperty("user.dir")
+    val loader: TemplateLoader = new FileTemplateLoader(cwd + "/routes/", "UTF-8")
+    _render.setTemplateLoader(loader)
+    _render.setCaching(false)
+    val template1: JadeTemplate = _render.getTemplate("index.pug")
+    
+    val model1: java.util.Map[String, Object] = new java.util.HashMap[String, Object]()
+    model1.put("city", "Bremen")
+    //binding
+    val html: String = _render.renderTemplate(template1, model1)
+    html
+  }
+```
+
+Are you not impressed yet? OK, let me teach you Pug in 15 seconds:
+- https://html2pug.now.sh
+
+2020's we use templating engines, for example eBay uses Marko and here is other examples on staticgen.com. Pug is a good one, so when you need SSR, then use Pug.
 
 
 ## #10: Spark-like Data Processing
+
+Spark is very popular. I'm going to oversimplify Spark: it lets you take unstructured data from data lakes dumps such as S3, then execute memory SQL operations (via a Spark culstur) and report on the data, using charts. 
+
+We can import S3, put it into local SQLite RAM as temp table and culsture it as needed, and then export it to a spreadhseet via POI.jar/library - so that you can generate a chart in Excel. 
+
 
 # Bad smells
 
@@ -196,9 +228,7 @@ PHP ASP JSP
 
 #### Fake Big Data 
 
-
 #### 30X faster. MemSQL
-
 
 
 #### Impossible to overstate
@@ -206,19 +236,11 @@ PHP ASP JSP
 
 ## B. 'No XML Assholes'
 
-#### Channeling Linus
 
 #### Rod Johnson hints to reduce XML
 
 #### Alternatives: Front-End, Python, Node.js, Go
 
-#### Logging in Java
-
-## C. Interruptions, like Slack
-
-At home, checking work email.
-
-#### Rengnogled 
 
 ## Conclusion
 
@@ -231,14 +253,12 @@ If so:
 
 - And most important: is there anything I should remove!
 
+
 Reach out to me please and help me. vic(at) eml.cc
 
-
-#### Forced sharding
-
-#### Blue-Green Deployments
 
 #### To master new way you must absorb the tools
 
 
 Scope 1 day,  half day
+
