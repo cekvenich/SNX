@@ -84,12 +84,5 @@ public class S3 {
 		return JUtil.toMap(s);
 	}
 
-	static public String toStr(InputStream ins) {
-		return new BufferedReader(new InputStreamReader(ins)).lines().collect(Collectors.joining("\n"));
-	}
-
-	static public InputStream toIns(String str) throws Throwable {
-		return new ByteArrayInputStream(str.getBytes("UTF-8"));
-	}// ()
 
 }// class

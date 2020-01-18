@@ -1,8 +1,13 @@
 package org.apache.SNX.util;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -34,6 +39,10 @@ public class JACodecUtil {
 		return (JSONArray) obj;
 	}
 
+	/**
+	 * 
+	 * @deprecated
+	 */
 	public static byte[] toBA8(String str) {
 		return str.getBytes(StandardCharsets.UTF_8);
 	}
@@ -41,11 +50,18 @@ public class JACodecUtil {
 	/**
 	 * Convert to String UT8
 	 *
-	 * @param ba
-	 * @return
+	 * @deprecated
 	 */
 	public static String toStr8(byte[] ba) {
 		return new String(ba, StandardCharsets.UTF_8);
 	}
+
+	static public String toStr(InputStream ins) {
+		return new BufferedReader(new InputStreamReader(ins)).lines().collect(Collectors.joining("\n"));
+	}
+
+	static public InputStream toIns(String str) throws Throwable {
+		return new ByteArrayInputStream(str.getBytes("UTF-8"));
+	}// ()
 
 }// class

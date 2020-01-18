@@ -25,6 +25,9 @@ public class HNetUtil {
 		return qs;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static String mapToQs(Map<String, Object> map) {
 		if (map == null || map.size() < 1)
 			return "";
