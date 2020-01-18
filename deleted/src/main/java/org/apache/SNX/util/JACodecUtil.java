@@ -1,5 +1,6 @@
 package org.apache.SNX.util;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class JUtil {
+public class JACodecUtil {
 	static JSONParser _parser = new JSONParser();
 
 	static public String toJ(List lst) {
@@ -23,14 +24,28 @@ public class JUtil {
 		return obj.toJSONString();
 	}
 
-	static public Map toMap(String j) throws ParseException {
-		Object obj = _parser.parse(j);
+	static public Map toMap(String s) throws ParseException {
+		Object obj = _parser.parse(s);
 		return (JSONObject) obj;
 	}
 
-	static public List toLst(String j) throws ParseException {
-		Object obj = _parser.parse(j);
+	static public List toLst(String s) throws ParseException {
+		Object obj = _parser.parse(s);
 		return (JSONArray) obj;
+	}
+
+	public static byte[] toBA8(String str) {
+		return str.getBytes(StandardCharsets.UTF_8);
+	}
+
+	/**
+	 * Convert to String UT8
+	 *
+	 * @param ba
+	 * @return
+	 */
+	public static String toStr8(byte[] ba) {
+		return new String(ba, StandardCharsets.UTF_8);
 	}
 
 }// class

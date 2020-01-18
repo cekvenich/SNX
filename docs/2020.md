@@ -186,7 +186,7 @@ We used to use PHP, ASP, JSP for SSR, heck 1/3 of WWW is PHP.
 But here is what we use in NodeJS, something more moderm:
 
 
-![](expressjs.gif)
+![](expressjs.png)
 
 And in Java/Scala we can do this:
 
