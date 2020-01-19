@@ -15,39 +15,42 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class JACodecUtil {
-	static JSONParser _parser = new JSONParser();
 
 	static public String toJ(List lst) {
-		JSONArray list = new JSONArray();
-		list.addAll(lst);
-		return list.toJSONString();
+		try {
+			JSONArray list = new JSONArray();
+			list.addAll(lst);
+			return list.toJSONString();
+		} catch (Throwable t) {
+			System.err.println(lst);
+			throw t;
+		}
 	}
 
 	static public String toJ(Map m) {
-		JSONObject obj = new JSONObject();
-		obj.putAll(m);
-		return obj.toJSONString();
+		try {
+			JSONObject obj = new JSONObject();
+			obj.putAll(m);
+			return obj.toJSONString();
+		} catch (Throwable t) {
+			System.err.println(m);
+			throw t;
+		}
+
 	}
 
 	static public Map toMap(String s) throws ParseException {
+		JSONParser _parser = new JSONParser();
 		Object obj = _parser.parse(s);
 		return (JSONObject) obj;
 	}
-	
-	/**
-	 * 
-	 * @deprecated
-	 */
-	static public List toLst(String s) throws ParseException {
+
+	static public List toList(String s) throws ParseException {
+		JSONParser _parser = new JSONParser();
 		Object obj = _parser.parse(s);
 		return (JSONArray) obj;
 	}
 
-	static public List toList(String s) throws ParseException {
-		Object obj = _parser.parse(s);
-		return (JSONArray) obj;
-	}
-	
 	/**
 	 * 
 	 * @deprecated
