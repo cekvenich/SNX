@@ -1,5 +1,6 @@
 package org.apache.SNX.db;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.apache.SNX.util.JACodecUtil;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -88,9 +90,11 @@ public class BasicS3Util {
 	 * @deprecated
 	 */
 	public Map getAsMap(String prefixPlusKey) throws Throwable {
-		InputStream ins = _mclient.getObject(_bucket, prefixPlusKey);
+		InputStream is = _mclient.getObject(_bucket, prefixPlusKey);
+		byte[] array = IOUtils.toByteArray(is);
+		InputStream ins = new ByteArrayInputStream(array);
+		
 		String s = JACodecUtil.toStr(ins);
-
 		return JACodecUtil.toMap(s);
 	}
 
@@ -99,14 +103,18 @@ public class BasicS3Util {
 	 * 
 	 */
 	public List<Map<String, Object>> getAsList(String prefixPlusKey) throws Throwable {
-		InputStream ins = _mclient.getObject(_bucket, prefixPlusKey);
+		InputStream is = _mclient.getObject(_bucket, prefixPlusKey);
+		byte[] array = IOUtils.toByteArray(is);
+		InputStream ins = new ByteArrayInputStream(array);
+		
 		String s = JACodecUtil.toStr(ins);
-
 		return JACodecUtil.toList(s);
 	}
 
 	public InputStream get(String prefixPlusKey) throws Throwable {
-		InputStream ins = _mclient.getObject(_bucket, prefixPlusKey);
+		InputStream is = _mclient.getObject(_bucket, prefixPlusKey);
+		byte[] array = IOUtils.toByteArray(is);
+		InputStream ins = new ByteArrayInputStream(array);
 		return ins;
 	}
 

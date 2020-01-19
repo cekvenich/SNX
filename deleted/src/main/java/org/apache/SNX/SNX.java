@@ -6,7 +6,7 @@ public class SNX {
 	 * Just print out some version / info
 	 */
 	public String getSNX() {
-		String ver = "V: 0.0.108";
+		String ver = "V: 0.0.109";
 		System.out.println(ver);
 		return ver;
 	}

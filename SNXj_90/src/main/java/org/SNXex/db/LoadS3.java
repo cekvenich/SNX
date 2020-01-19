@@ -1,5 +1,7 @@
 package org.SNXex.db;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +11,7 @@ import java.util.Map;
 import org.apache.SNX.SNX;
 import org.apache.SNX.db.BasicS3Util;
 import org.apache.SNX.util.TimerU;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -20,7 +23,7 @@ public class LoadS3 {
 	Log LOG = LogFactory.getLog(MethodHandles.lookup().lookupClass());
 	Faker _faker = new Faker();
 
-	String prefix = "2020/01/18/APAC";
+	String prefix = "2020/01/19/APAC";
 
 	public void load(BasicS3Util s3) throws Throwable {
 		
@@ -34,7 +37,9 @@ public class LoadS3 {
 		String key = lst.get(0);
 		System.out.println(key);
 		
+		
 		List<Map<String,Object>> rows = _s3.getAsList(key);
+		
 		
 		Map row = rows.get(0);
 		
