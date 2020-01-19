@@ -22,8 +22,6 @@ import org.apache.commons.logging.LogFactory
 
 import io.bloco.faker.Faker
 
-
-
 class LoadS3 {
 
   var _s3: BasicS3Util = _

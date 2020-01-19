@@ -12,12 +12,9 @@ import org.apache.commons.logging.LogFactory
 
 import io.bloco.faker.Faker
 
-import LoadFakeDB._
 
-
-object LoadFakeDB {
-
-  var LOG: Log = LogFactory.getLog(MethodHandles.lookup().lookupClass())
+class LoadFakeSDB(var _mdb: SDB) {
+   var LOG: Log = LogFactory.getLog(MethodHandles.lookup().lookupClass())
 
   var _faker: Faker = new Faker()
 
@@ -25,10 +22,7 @@ object LoadFakeDB {
     "INSERT INTO tab1(fullName, city, ip, dateOfPurch, cc, dept, price) VALUES(" +
       "?,?,? ,?,?,?,?" +
       ")")
-}
-
-class LoadFakeDB(var _mdb: DBS) {
-
+ 
   LOG.info("oh hi log")
 
   def loadDB(): Unit = {
@@ -42,6 +36,7 @@ class LoadFakeDB(var _mdb: DBS) {
       // create schema
       con = _mdb.begin()
       _mdb.write(con, new java.lang.StringBuilder(createTab1))
+      
       con.commit()
     }
     con = _mdb.begin()

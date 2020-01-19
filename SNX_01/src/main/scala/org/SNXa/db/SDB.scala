@@ -10,7 +10,7 @@ import java.util.List
 
 import java.util.Map
 
-import org.apache.SNX.db.AbstractDB
+import org.apache.SNX.db.AbstractSDB
 
 import org.apache.commons.logging.Log
 
@@ -26,21 +26,12 @@ import org.sqlite.SQLiteConfig.SynchronousMode
 
 import org.sqlite.SQLiteConfig.TempStore
 
-import DBS._
 
-
-object DBS {
-
-  var LOG: Log = LogFactory.getLog(MethodHandles.lookup().lookupClass())
-
-  var _conW: Connection = _
-
-}
 
 /**
   * Warper for SQL-ite
   */
-class DBS /**
+class SDB /**
   * _db = new DB(5000, ":memory:"); // for memory DB (RAM) _db = new DBS(5000,
   * "/home/db/sdb.db"); // or file path if using file
   *
@@ -48,8 +39,12 @@ class DBS /**
   * @param db        :memory: for RAM or file path
   */
 (cacheSize: Int, db: String)
-    extends AbstractDB {
+    extends AbstractSDB {
 
+   var LOG: Log = LogFactory.getLog(MethodHandles.lookup().lookupClass())
+
+  var _conW: Connection = _
+    
   val configW: SQLiteConfig = new SQLiteConfig()
   configW.setCacheSize(cacheSize)
   configW.setBusyTimeout(120 * 1000)
@@ -79,7 +74,7 @@ class DBS /**
   /**
  Does the table exists?
     */
-  def tableExists(db: DBS, table: String): Boolean =
+  def tableExists(db: SDB, table: String): Boolean =
     try {
       val sql: StringBuilder = new StringBuilder(
         "SELECT name FROM sqlite_master WHERE type='table' AND name='")

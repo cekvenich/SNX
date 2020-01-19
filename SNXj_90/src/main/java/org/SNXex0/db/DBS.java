@@ -1,4 +1,4 @@
-package org.SNXex.db;
+package org.SNXex0.db;
 
 import java.lang.invoke.MethodHandles;
 import java.sql.Connection;
@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.SNX.db.AbstractDB;
+import org.apache.SNX.db.AbstractSDB;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.sqlite.SQLiteConfig;
@@ -18,7 +18,7 @@ import org.sqlite.SQLiteConfig.TempStore;
 /**
  * Warper for SQL-ite
  */
-public class DBS extends AbstractDB {
+public class DBS extends AbstractSDB {
 
 	static Log LOG = LogFactory.getLog(MethodHandles.lookup().lookupClass());
 
