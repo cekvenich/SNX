@@ -1,6 +1,6 @@
 
-# 2020's Best Practice pillars for the Java ecosystem
-#### (title continued...) relative to Java from '00s, from tech manager's POV, with examples. Plus a few bad practices
+# Java ecosystem's 10 Best Practice pillars for the 2020's
+#### (title continued...) for back end / data engineering, relative to Java from '00s, from tech manager's POV, with examples.
 by Vic Cekvenich
 
 Summary: There are 2 radical differences in today's Java ecosystem relative to the prior decade. The listed difference amount to a difference in kind, not a difference in degree. We have achieved in the 2020's an order of magnitude improvement. 
@@ -18,15 +18,69 @@ SDKMan, Scala, and Java 11 are incremental improvements for the 2020's Java ecos
 Kotlin is JVM default used for Google's Andorid platform. Scala is popular for Data Science. And Groovy is dynamic, like NodeJS and Python.
 All 3 are more concise than Java for writing applications, utilities, etc. Of the 3 Scala seems easiest to adopt, you can for example go online and paste Java code and it will be converted to Scala. But when writing a library, it is better to write it in Java, so it can be used by others on the JVM platform. 
 
-In 2020's we install Java 11 LTS via SDKMan, and run simply the app via:
+In 2020's we install Java 11 LTS via SDKMan, and simply run the app via:
 
 ```
-	java -jar app1.jar
+	java -jar myApp.jar
 ``` 
 
 Oh, an why be JVM based? Because JVM is better then C++, the closest alternative. (One example of why C++ is bad is that trillion dollar F35 plane is a failure, and it was written in C++)
 
 ## #2: Cloud/S3
+
+There is still a lot of organizations that have not moved to the the cloud and the basic cloud service is S3 (aka Object Store or Hadoop). 
+S3 providers include AWS, GAE, but also Linode, Wasabi, Vultr, etc. Storing data is very cheap, almost free, so storing PetaBytes and more is common. Here is an example of writing to S3 from Scala, using the Java helper classes:
+
+```
+    val s3: BasicS3Util = new BasicS3Util(server, access, secret, bucket)
+    new LoadS3().load(s3)
+
+```
+And that calls this class:
+
+```
+  def load(s3: BasicS3Util): Unit = {
+    new SNX().getSNX
+    _s3 = s3
+    ins() // each one is a million, so 3 million rows inserted
+    ins()
+    ins()
+   }//()
+
+   def ins(): Unit = {
+    // 25*40* 1000 = 1 Million rows inserted
+    val mCount: Int = 25
+    var i: Int = 0
+    while (i <= mCount) {
+      val t: TimerU = TimerU.start()
+      _insBatch(40 * 1000)
+      i = i + 1
+      println(" in " + t.time())
+    }
+  }//()
+
+  def _insBatch(count: Int): Unit = {
+    var i: Int = 0
+    val lst: java.util.List[java.util.Map[String, Object]] = new ArrayList()
+    while (i <= count) {
+      val row: java.util.Map[String, Object] = new HashMap()
+      row.put("name", _faker.name.nameWithMiddle())
+      row.put("city", _faker.address.city())
+      row.put("ip",   _faker.internet.ipV4Address().toString)
+      row.put("date", _faker.date.backward().toGMTString())
+      row.put("cc",   _faker.business.creditCardType())
+      row.put("dept", _faker.commerce.department())
+      row.put("price",_faker.commerce.price())
+      lst.add(row) 
+      i = i + 1
+    }
+    _s3.put(prefix, lst)
+  }//()
+
+```
+The calls helper functions convert the java.util.List of rows to be stored into an InputStream, becuse S3 is implmented like a file system. We can later find our lists via 'path'.
+
+Above uses Vultr's S3 - it is easier to use than AWS. There are a ton of great cloud services, if you want to do a small coding execise later in this article, sign up for http://emailjs.com account.
 
 
 ## #3: DB in RAM Memory
@@ -37,17 +91,20 @@ Before the 2020's a DB (SQL, Object, FTS, Graph, etc.) would be stored on an SSD
 But now cloud providers have machines that have 512 Gigs of RAM and more, and even terabytes of RAM is available. And RAM is much faster than SSDs. 
 And if terabytes if to small for your DB? You can cluster you DB cloud containers and combine several DB servers into one any size you need.
 
-We can still use cheap S3 type storage to dump things. But for HFT, AdTech, Data Science and such: we can and should store in RAM. 
+Our new friends include Aerospkie, Spark, Clickhouse, Apache Ignite, etc. 
 
 Our old friend REDIS works well, as does SQLite. SQLite works in RAM, or can have temp tables in RAM for materialized views.
 
-Our new friends include Aerospkie, Spark, Clickhouse, Apache Ignite, etc. 
-
 This is a a paradigm shift, and requires learning and internalizing. So not only should your cloud VM's be 512 Gig or RAM or more, your local development machine should also have 128Gig of RAM or more. (Some development workstation examples with 128Gig plus or RAM: iMac Pro, System 76 and Digital Tigers).
 
-##### Note: Lots of people use a term Big Data. It is not Big Data if it fits on my $800 laptop with 1TB SSD Driver. There is no need to cluster things that are in terabytes.
+##### Note: Lots of people use a term Big Data. It is not Big Data if it fits on my $800 laptop with 1TB SSD Driver. There is no need to cluster data that are in terabytes, it fits in RAM of a single box. We need a new term: small data, when you have less than a few terabytes.
 
-### Spark-like Data Processing
+### Spark-like Data Engineering
+
+Spark is very popular. I'm going to oversimplify Spark: it lets you take unstructured data from data lakes dumps such as S3, then execute memory SQL operations (via a Spark culstur) and report on the data, using charts. 
+
+We can read from S3 into SQLite and then use the Java Poi library to save to a spreadsheet. From a spreadsheet it is a few clicks to make a chart or a graph. 
+Data Engineers used CSV in the past, but using SQLite DB is a big improvement. 
 
 
 ## #4: Tools: Gradle.build, Jitpack, Cloud IDE.
@@ -87,6 +144,8 @@ group = 'com.github.jitpack'
 
 It is just as easy to publish a jar as it is to publish npm from the NodeJS ecosystem. Also a big win is that it is less likely that you will break the build, as everything including IDE's revolves around the gradle.build.
 
+##### No XML. The entire code base backing this article is not using any XML. XML is a replant for good programmers, they move to other platforms. Rod Johnson, creator of Spring-Boot has encouraged migration away form XML with some political hints.
+
 
 Aside, before the '20s we started deploying to cloud. Now our IDE can be in the cloud also, eg: CodeAnywhere.
 
@@ -94,7 +153,7 @@ Aside, before the '20s we started deploying to cloud. Now our IDE can be in the 
 ### Demo Example 1: 
 
 Here is an example project folder that includes items we mentioned so far: Scala, gradle.build and SQLite. It is a simple Scala project that uses a Java lib (in the lib folder, but deployed )
- that measures how many records we can insert per second. You can change the code to have SQLite built-in feature to use RAM instead of disk. It leverages a few helper classes that I added to the SNX lib.
+ that measures how many records we can read from S3 and insert per second. You can change the code to have SQLite built-in feature to use RAM DB instead of disk. It leverages a few helper classes that I added to the SNX lib.
 
 - https://github.com/cekvenich/SNX/tree/master/SNX_01
 
@@ -103,7 +162,7 @@ Here is an example project folder that includes items we mentioned so far: Scala
 
 Next few points will touch on something called JAMstack, simplistically it is an  API way of working with (generated) front end, including SPA.
 
-## #5: JAR for 'REST', not WAR; plus Reactive Streams.
+## #5: JAR for Services/'REST', with Reactive Streams
 
 #### A quick history lesson
 In ancient times, Java would use containers such as Tomcat via WAR files that contained WEB-INF/libs and such. Then it eveloved into using Trustin Lee's Netty project - used by Twiter, Akka, and more. Netty was an async (NIO) network library, just a jar and did not need WAR or container making it easier to maintain. 
@@ -143,7 +202,7 @@ CDN also helps with Blue-Green deployments, and even gradual deployment, where y
 
 ## #8: Client side API, Client side ViewModel
 
-Today from a browser we write **fetch()** to. Question: Who should write that fetch() command that runs in the browser on the client side? 2020's the answer is: Back end engineer. The APIs are done by the back end team going forward. Front end has to worry about UX, CSS design, CSS frameworks and back end team supports them. Those API calls to fetch: the fetch() commands are writen in a ViewModel class (JavaScript/TypeScript support classes that can transpile to ES5/IE11 via tools like PrePros.io and such). You write a ViewModel per page/screen, just like before when you wrote the ViewModel server side.
+Today from a browser we write **fetch()**. Question: Who should write that fetch() command that runs in the browser on the client side? 2020's the answer is: Back end engineer. The APIs are done by the back end team going forward. Front end has to worry about UX, CSS design, CSS frameworks and back end team supports them. Those API calls to fetch: the fetch() commands are writen in a ViewModel class (JavaScript/TypeScript support classes that can transpile to ES5/IE11 via tools like PrePros.io and such). You write a ViewModel per page/screen, just like before when you wrote the ViewModel server side.
 
 This is where a git 'uni repo' comes in, the ViewModel is tied to the View and the ViewModel API are tied to the server side services. The bank end team has to follow the View changes and map to it. The front end developer just uses the ViewModel, and does not touch the internal fetch() code. 
 This way it is the back end developer that is responsible for TLS and user authentication for each API call, it is their lib. The front end developers can't do transport layer well. And back end team handles all the user authentication and data security. 
@@ -155,16 +214,11 @@ This is similar to AWS Amplify or Google FiereBase, where you just download the 
 Note: I keep using REST in quotes, you don't have to do strict REST, but you must be able to write a stress test against it.
 
 
+## #9: Switch to E2E testing (with CI/CD).
 
+E2E is end to end testing, and it is better than our older methods. Before, we were dogmatic about Unit testing, and we can still use Unit testing where needed, for example libraries. But E2E testing is required.
 
-
-
-
-
-
-## #9: No  unit tests, no TDD, no BDD: Time for E2E testing with CI/CD
-
-E2E is end to end testing, and it is better than our older methods. With E2E you automate the testing of the end point, in this case you test the ViewModel/API.  If the ViewModel works, then everything integrates and everything must work! So in addition to stress/load testing of the server service, you must do ViewModel/API testing of Browser, Android and IOS. 
+With E2E you automate the testing of the end point, in this case you test the ViewModel/API.  If the ViewModel works, then everything integrates and everything must work! So in addition to stress/load testing of the server service, you must do ViewModel/API testing of Browser, Android and IOS. 
 Also, you can still do some unit tests where you think they are needed, but it is no longer exposed to up to management, management will just check on E2E.
 
 
@@ -178,11 +232,19 @@ In our case our lib will use Apache http core to do both, serve REST and serve h
 - 4) Selenium Chormedriver (v4), in Java will open a 'browser' and call a .js function to start the 'QUnit' test. It will then report the test results, for example via email. So you will have a CLI Scala script that runs the http server and runs a Selenium in a thread that call to the .js testing function.
 - 5) CI/CD Scala server that is running at all times in the cloud. It gets called by webhooks to do E2E, load testing, staging deployments, etc. This is something you have to write. 
 
-### Lab Example 1: E2E Test ( test the API/ViewModel)
+### Lab Example: E2E Test ( test the client side API/ViewModel)
 
+X
+X
+X
+X
+X
+X
+X
 Here is the Qunit
 
 Here is the call to QUnit from Selenium.
+
 
 
 ## #10 Bonus: SSR (Server Side Rendering) with Pug
@@ -219,31 +281,17 @@ Are you not impressed yet? OK, let me teach you Pug in 15 seconds:
 2020's we use templating engines, for example eBay uses Marko and here is other examples on staticgen.com. Pug is a good one, so when you need SSR, then use Pug.
 
 
+The End
 
-Spark is very popular. I'm going to oversimplify Spark: it lets you take unstructured data from data lakes dumps such as S3, then execute memory SQL operations (via a Spark culstur) and report on the data, using charts. 
-
-We can import S3, put it into local SQLite RAM as temp table and culsture it as needed, and then export it to a spreadhseet via POI.jar/library - so that you can generate a chart in Excel. 
-
-
-# Bad smells
-
-## A. Hitchen's Razor & bombastic executive adjectives
+----
 
 
-#### Fake Big Data 
+### Scope 
 
-#### 30X faster. MemSQL
+The scope of the best practices is limited to what an average engineer can learn then in 1 day, and a Sr engineer can learn them in 1/2 of a day.
+It was influenced Spring-boot, Spark and Akka
 
-
-#### Impossible to overstate
-
-
-## B. 'No XML Assholes'
-
-
-#### Rod Johnson hints to reduce XML
-
-#### Alternatives: Front-End, Python, Node.js, Go
+The major changes are that you must use 128gig to 8tb of RAM, you must do stress testing, and the ViewModel is now client side.
 
 
 ## Conclusion
@@ -251,18 +299,12 @@ We can import S3, put it into local SQLite RAM as temp table and culsture it as 
 Are you an experienced Java tech leader?
 If so:
 
-- I listed 12 good particles. Is there a 13th?
+- I listed some good particles. Is there another?
 
-- I listed 2 bad practices. Is the a 3rd?
-
-- And most important: is there anything I should remove!
+- And most important: is there anything I should remove or correct!
 
 
 Reach out to me please and help me. vic(at) eml.cc
 
 
-#### To master new way you must absorb the tools
-
-
-Scope 1 day,  half day
 
