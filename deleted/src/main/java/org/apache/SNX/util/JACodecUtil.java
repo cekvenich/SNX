@@ -4,17 +4,21 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.invoke.MethodHandles;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class JACodecUtil {
+	static Log LOG = LogFactory.getLog(MethodHandles.lookup().lookupClass());
 
 	static public String toJ(List lst) throws Throwable {
 		try {
@@ -22,7 +26,7 @@ public class JACodecUtil {
 			list.addAll(lst);
 			return list.toJSONString();
 		} catch (Throwable t) {
-			System.err.println(lst);
+			LOG.warn(lst);
 			throw t;
 		}
 	}
@@ -33,7 +37,7 @@ public class JACodecUtil {
 			obj.putAll(m);
 			return obj.toJSONString();
 		} catch (Throwable t) {
-			System.err.println(m);
+			LOG.warn(m);
 			throw t;
 		}
 
@@ -46,7 +50,7 @@ public class JACodecUtil {
 			return (JSONObject) obj;
 
 		} catch (Throwable t) {
-			System.err.println(s);
+			LOG.warn(s);
 			throw t;
 		}
 	}
@@ -58,7 +62,7 @@ public class JACodecUtil {
 			return (JSONArray) obj;
 
 		} catch (Throwable t) {
-			System.err.println(s);
+			LOG.warn(s);
 			throw t;
 		}
 	}

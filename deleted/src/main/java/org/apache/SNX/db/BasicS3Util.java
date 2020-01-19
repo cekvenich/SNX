@@ -1,12 +1,15 @@
 package org.apache.SNX.db;
 
 import java.io.InputStream;
+import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import org.apache.SNX.util.JACodecUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import io.minio.MinioClient;
 import io.minio.Result;
@@ -25,6 +28,8 @@ public class BasicS3Util {
 
 	protected String _bucket;
 
+	static Log LOG = LogFactory.getLog(MethodHandles.lookup().lookupClass());
+
 	public BasicS3Util(String server, String access, String secret, String bucket) throws Throwable {
 		_bucket = bucket;
 		_mclient = new MinioClient(server, access, secret);
@@ -36,12 +41,14 @@ public class BasicS3Util {
 
 	public List<String> find(String prefix) throws Throwable {
 		Iterable<Result<Item>> iter = _mclient.listObjects(_bucket, prefix, true);
+		
 		List<String> lst = new ArrayList();
 		for (Result<Item> result : iter) {
 			Item item = result.get();
 			if (!item.isDir())
 				lst.add(item.objectName());
 		}
+		LOG.info(lst.size());
 		return lst;
 	}
 
@@ -52,9 +59,16 @@ public class BasicS3Util {
 		String s = JACodecUtil.toJ(m);
 		InputStream ins = JACodecUtil.toIns(s);
 		String key = UUID.randomUUID().toString();
+		key = key.replaceAll("[^a-zA-Z0-9]", "");// clean
 		_mclient.putObject(_bucket, prefix + "/" + key, ins, "application/octet-stream");
 	}
 
+	public void put(String prefix, InputStream ins) throws Throwable {
+		String key = UUID.randomUUID().toString();
+		key = key.replaceAll("[^a-zA-Z0-9]", "");// clean
+		_mclient.putObject(_bucket, prefix + "/" + key, ins, "application/octet-stream");
+	}
+	
 	/**
 	 * Auto generates guid, you only pass the prefix
 	 */
@@ -91,4 +105,10 @@ public class BasicS3Util {
 		return JACodecUtil.toList(s);
 	}
 
+	public InputStream get(String prefixPlusKey) throws Throwable {
+		InputStream ins = _mclient.getObject(_bucket, prefixPlusKey);
+		return ins;
+	}
+
+	
 }// class

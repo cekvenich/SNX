@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.SNX.SNX;
 import org.apache.SNX.db.BasicS3Util;
 import org.apache.SNX.util.TimerU;
 import org.apache.commons.logging.Log;
@@ -22,18 +23,23 @@ public class LoadS3 {
 	String prefix = "2020/01/18/APAC";
 
 	public void load(BasicS3Util s3) throws Throwable {
+		
+		new SNX().getSNX();
+		
 		_s3 = s3;
 		
-		ins();
+		//ins();
 		
 		List<String> lst =_s3.find(prefix);
-		
 		String key = lst.get(0);
 		System.out.println(key);
 		
-		List rows = _s3.getAsList(key);
-
-		System.out.println(rows);
+		List<Map<String,Object>> rows = _s3.getAsList(key);
+		
+		Map row = rows.get(0);
+		
+		System.out.println(row);
+		
 	}
 
 	protected void ins() throws Throwable {
