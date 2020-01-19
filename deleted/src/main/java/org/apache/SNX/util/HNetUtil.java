@@ -1,5 +1,8 @@
 package org.apache.SNX.util;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
@@ -14,6 +17,19 @@ import org.apache.hc.core5.net.URLEncodedUtils;
 public class HNetUtil {
 
 	public static final String OK = "OK";
+
+	/**
+	 * 
+	 * @deprecated
+	 */
+	public static byte[] getBytesFromInputStream(InputStream is) throws IOException {
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		byte[] buffer = new byte[0xFFFF];
+		for (int len = is.read(buffer); len != -1; len = is.read(buffer)) {
+			os.write(buffer, 0, len);
+		}
+		return os.toByteArray();
+	}
 
 	public static Map<String, String> qsToMap(final String uri_) {
 		if (!uri_.contains("?"))

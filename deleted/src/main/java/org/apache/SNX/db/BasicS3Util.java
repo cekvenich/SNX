@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.apache.SNX.util.JACodecUtil;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -43,7 +42,7 @@ public class BasicS3Util {
 
 	public List<String> find(String prefix) throws Throwable {
 		Iterable<Result<Item>> iter = _mclient.listObjects(_bucket, prefix, true);
-		
+
 		List<String> lst = new ArrayList();
 		for (Result<Item> result : iter) {
 			Item item = result.get();
@@ -70,7 +69,7 @@ public class BasicS3Util {
 		key = key.replaceAll("[^a-zA-Z0-9]", "");// clean
 		_mclient.putObject(_bucket, prefix + "/" + key, ins, "application/octet-stream");
 	}
-	
+
 	/**
 	 * Auto generates guid, you only pass the prefix
 	 */
@@ -91,9 +90,9 @@ public class BasicS3Util {
 	 */
 	public Map getAsMap(String prefixPlusKey) throws Throwable {
 		InputStream is = _mclient.getObject(_bucket, prefixPlusKey);
-		byte[] array = IOUtils.toByteArray(is);
+		byte[] array = is.readAllBytes();
 		InputStream ins = new ByteArrayInputStream(array);
-		
+
 		String s = JACodecUtil.toStr(ins);
 		return JACodecUtil.toMap(s);
 	}
@@ -104,19 +103,18 @@ public class BasicS3Util {
 	 */
 	public List<Map<String, Object>> getAsList(String prefixPlusKey) throws Throwable {
 		InputStream is = _mclient.getObject(_bucket, prefixPlusKey);
-		byte[] array = IOUtils.toByteArray(is);
+		byte[] array = is.readAllBytes();
 		InputStream ins = new ByteArrayInputStream(array);
-		
+
 		String s = JACodecUtil.toStr(ins);
 		return JACodecUtil.toList(s);
 	}
 
 	public InputStream get(String prefixPlusKey) throws Throwable {
 		InputStream is = _mclient.getObject(_bucket, prefixPlusKey);
-		byte[] array = IOUtils.toByteArray(is);
+		byte[] array = is.readAllBytes();
 		InputStream ins = new ByteArrayInputStream(array);
 		return ins;
 	}
 
-	
 }// class

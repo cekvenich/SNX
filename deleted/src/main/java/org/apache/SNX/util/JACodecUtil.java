@@ -1,21 +1,18 @@
 package org.apache.SNX.util;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.invoke.MethodHandles;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 public class JACodecUtil {
 	static Log LOG = LogFactory.getLog(MethodHandles.lookup().lookupClass());
@@ -84,8 +81,8 @@ public class JACodecUtil {
 		return new String(ba, StandardCharsets.UTF_8);
 	}
 
-	static public String toStr(InputStream ins) {
-		return new BufferedReader(new InputStreamReader(ins)).lines().collect(Collectors.joining("\n"));
+	static public String toStr(InputStream ins) throws IOException {
+		return new String(ins.readAllBytes(), StandardCharsets.UTF_8);
 	}
 
 	static public InputStream toIns(String str) throws Throwable {

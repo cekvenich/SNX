@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.apache.SNX.SNX;
 import org.apache.SNX.db.BasicS3Util;
+import org.apache.SNX.util.JACodecUtil;
 import org.apache.SNX.util.TimerU;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
@@ -36,16 +37,15 @@ public class LoadS3 {
 		List<String> lst =_s3.find(prefix);
 		String key = lst.get(0);
 		System.out.println(key);
-		
-		
+				
 		List<Map<String,Object>> rows = _s3.getAsList(key);
-		
 		
 		Map row = rows.get(0);
 		
 		System.out.println(row);
 		
 	}
+
 
 	protected void ins() throws Throwable {
 		int mCount = 2; // 25*40* 1000 = 1 Million
