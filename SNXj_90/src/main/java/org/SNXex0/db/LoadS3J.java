@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
 
 import io.bloco.faker.Faker;
 
-public class LoadS3 {
+public class LoadS3J {
 
 	BasicS3Util _s3;
 	Log LOG = LogFactory.getLog(MethodHandles.lookup().lookupClass());

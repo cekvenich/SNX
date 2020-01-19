@@ -26,8 +26,10 @@ In 2020's we install Java 11 LTS via SDKMan, and run simply the app via:
 
 Oh, an why be JVM based? Because JVM is better then C++, the closest alternative. (One example of why C++ is bad is that trillion dollar F35 plane is a failure, and it was written in C++)
 
+## #2: Cloud/S3
 
-## #2: DB in RAM Memory
+
+## #3: DB in RAM Memory
 
 DB's using RAM is a new and revolutionary improvement.
 
@@ -45,7 +47,10 @@ This is a a paradigm shift, and requires learning and internalizing. So not only
 
 ##### Note: Lots of people use a term Big Data. It is not Big Data if it fits on my $800 laptop with 1TB SSD Driver. There is no need to cluster things that are in terabytes.
 
-## #3: Tools: Gradle.build, Jitpack, Cloud IDE.
+### Spark-like Data Processing
+
+
+## #4: Tools: Gradle.build, Jitpack, Cloud IDE.
 
 Before the '20's, we used to use POM.xml. The improvement is self evident with gradle.build.
 
@@ -98,7 +103,7 @@ Here is an example project folder that includes items we mentioned so far: Scala
 
 Next few points will touch on something called JAMstack, simplistically it is an  API way of working with (generated) front end, including SPA.
 
-## #4: JAR for 'REST', not WAR; plus Reactive Streams.
+## #5: JAR for 'REST', not WAR; plus Reactive Streams.
 
 #### A quick history lesson
 In ancient times, Java would use containers such as Tomcat via WAR files that contained WEB-INF/libs and such. Then it eveloved into using Trustin Lee's Netty project - used by Twiter, Akka, and more. Netty was an async (NIO) network library, just a jar and did not need WAR or container making it easier to maintain. 
@@ -112,7 +117,7 @@ Here is an example Scala project folder that uses Apache http core library v5 th
 - https://github.com/cekvenich/SNX/tree/master/SNX_02
 
 
-## #5: Stress/Load testing
+## #6: Stress/Load testing
 
 Java now comes with a built in HTTP Client. In the past we might have setup jMeter or Grinder, but now writing a test script the uses the built in Java HTTP Client wrapped in executor pool makes it just as easy to script GETs and POSTs. 
 
@@ -129,14 +134,14 @@ Java now comes with a built in HTTP Client. In the past we might have setup jMet
 There is a helper class that wraps this method in an executor to simulate appropriate load. You need to write a CLI Scala script to start the http services, runs the stress test, and then report the results (for example email the results). 
 Stress/Load testing is **not optional**. It can be scripted into your CI process to catch any performance regressions. (Github has hooks that can transparently call our little Apache http core lib and  email us the performance results as well as use the Jitpack API as needed). 
 
-## #6: Cloud Devops
+## #7: Cloud Devops
 
 In the past you may put nginx in front of your REST services, but now we use Cloud to front the services. We use a CDN. CDN provides https offloading, early TLS handshake, HTTP/3(udp based), etc.  Also it helps with security since the endpoint IP of the services is not exposed to the WWW. 
 
 CDN also helps with Blue-Green deployments, and even gradual deployment, where you deploy to Canada or APAC first, and a day later to EU and Americas once you know there are no stability issues with a new push.
 
 
-## #7: Client side API, Client side ViewModel
+## #8: Client side API, Client side ViewModel
 
 Today from a browser we write **fetch()** to. Question: Who should write that fetch() command that runs in the browser on the client side? 2020's the answer is: Back end engineer. The APIs are done by the back end team going forward. Front end has to worry about UX, CSS design, CSS frameworks and back end team supports them. Those API calls to fetch: the fetch() commands are writen in a ViewModel class (JavaScript/TypeScript support classes that can transpile to ES5/IE11 via tools like PrePros.io and such). You write a ViewModel per page/screen, just like before when you wrote the ViewModel server side.
 
@@ -157,7 +162,7 @@ Note: I keep using REST in quotes, you don't have to do strict REST, but you mus
 
 
 
-## #8: No more unit tests, no TDD, no BDD: Time for E2E testing with CI/CD
+## #9: No  unit tests, no TDD, no BDD: Time for E2E testing with CI/CD
 
 E2E is end to end testing, and it is better than our older methods. With E2E you automate the testing of the end point, in this case you test the ViewModel/API.  If the ViewModel works, then everything integrates and everything must work! So in addition to stress/load testing of the server service, you must do ViewModel/API testing of Browser, Android and IOS. 
 Also, you can still do some unit tests where you think they are needed, but it is no longer exposed to up to management, management will just check on E2E.
@@ -180,7 +185,7 @@ Here is the Qunit
 Here is the call to QUnit from Selenium.
 
 
-## #9: SSR (Server Side Rendering) with Pug
+## #10 Bonus: SSR (Server Side Rendering) with Pug
 
 We used to use PHP, ASP, JSP for SSR, heck 1/3 of WWW is PHP.
 But here is what we use in NodeJS, something more moderm:
@@ -214,7 +219,6 @@ Are you not impressed yet? OK, let me teach you Pug in 15 seconds:
 2020's we use templating engines, for example eBay uses Marko and here is other examples on staticgen.com. Pug is a good one, so when you need SSR, then use Pug.
 
 
-## #10: Spark-like Data Processing
 
 Spark is very popular. I'm going to oversimplify Spark: it lets you take unstructured data from data lakes dumps such as S3, then execute memory SQL operations (via a Spark culstur) and report on the data, using charts. 
 

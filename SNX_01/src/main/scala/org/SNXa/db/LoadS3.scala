@@ -65,20 +65,21 @@ class LoadS3 {
     var i: Int = 0
     val lst: java.util.List[java.util.Map[String, Object]] = new ArrayList()
     while (i <= count) {
+      
       val row: java.util.Map[String, Object] = new HashMap()
-      row.put("name", _faker.name.nameWithMiddle())
-      row.put("city", _faker.address.city())
-      row.put("ip", _faker.internet.ipV4Address().toString)
-      row.put("date", _faker.date.backward().toGMTString())
-      row.put("cc", _faker.business.creditCardType())
-      row.put("dept", _faker.commerce.department())
+      row.put("name",   _faker.name.nameWithMiddle())
+      row.put("city",   _faker.address.city())
+      row.put("ip",    _faker.internet.ipV4Address().toString)
+      row.put("date",  _faker.date.backward().toGMTString())
+      row.put("cc",    _faker.business.creditCardType())
+      row.put("dept",  _faker.commerce.department())
       row.put("price", _faker.commerce.price())
       lst.add(row) 
       i = i + 1
       
     }
     _s3.put(prefix, lst)
-  }
+  }//()
 
 }
 
