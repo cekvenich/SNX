@@ -56,7 +56,7 @@ public class BasicS3Util {
 	/**
 	 * @deprecated
 	 */
-	public void put(String prefix, Map m) throws Throwable {
+	public void putMap(String prefix, Map m) throws Throwable {
 		String s = JACodecUtil.toJ(m);
 		InputStream ins = JACodecUtil.toIns(s);
 		String key = UUID.randomUUID().toString();
@@ -64,7 +64,7 @@ public class BasicS3Util {
 		_mclient.putObject(_bucket, prefix + "/" + key, ins, "application/octet-stream");
 	}
 
-	public void put(String prefix, InputStream ins) throws Throwable {
+	public void putIns(String prefix, InputStream ins) throws Throwable {
 		String key = UUID.randomUUID().toString();
 		key = key.replaceAll("[^a-zA-Z0-9]", "");// clean
 		_mclient.putObject(_bucket, prefix + "/" + key, ins, "application/octet-stream");
@@ -88,7 +88,7 @@ public class BasicS3Util {
 	/**
 	 * @deprecated
 	 */
-	public Map getAsMap(String prefixPlusKey) throws Throwable {
+	protected Map getAsMap(String prefixPlusKey) throws Throwable {
 		InputStream is = _mclient.getObject(_bucket, prefixPlusKey);
 		byte[] array = is.readAllBytes();
 		InputStream ins = new ByteArrayInputStream(array);

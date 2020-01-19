@@ -22,7 +22,7 @@ targetCompatibility = JavaVersion.VERSION_11
 }*/
 
 dependencies {
-    implementation 'com.github.cekvenich:SNX:0.0.112'    
+    implementation 'com.github.cekvenich:SNX:0.0.114'    
 }
 application {
     // Define the main class for the application.

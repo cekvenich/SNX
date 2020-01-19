@@ -8,7 +8,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 
 // todo: add pool
-public class AbstractDB {
+public class AbstractSDB {
 
 	static QueryRunner _srun = new QueryRunner();
 
