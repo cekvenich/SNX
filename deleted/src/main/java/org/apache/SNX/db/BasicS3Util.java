@@ -12,6 +12,12 @@ import io.minio.MinioClient;
 import io.minio.Result;
 import io.minio.messages.Item;;
 
+/**
+ * Tested w/ Vultr S3 Object store, but should work with all S3 compatible object stores * 
+ * ( AWS, GAE, Linode, DO, Wassabi, etc. )
+ * 
+ * It uses JSON as codec. It could be improved.
+ */
 public class BasicS3Util {
 
 	protected MinioClient _mclient;

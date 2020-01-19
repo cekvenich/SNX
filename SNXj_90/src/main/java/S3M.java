@@ -1,7 +1,6 @@
-package org.SNXex.db;
 
-import java.util.HashMap;
-import java.util.Map;;
+import org.SNXex.db.LoadS3;
+import org.apache.SNX.db.BasicS3Util;
 
 public class S3M {
 
@@ -14,15 +13,8 @@ public class S3M {
 
 		BasicS3Util s3 = new BasicS3Util(server, access, secret, bucket);
 
-		String prefix = "Monday/NY";
-		Map row = new HashMap();
-		row.put("a", "A");
-		row.put("b", "B");
-		
-		s3.put(prefix, row);
-		s3.put(prefix, row);
+		new LoadS3().load(s3);
 
-		System.out.println(s3.find(prefix));
 	}
 
 }// class
