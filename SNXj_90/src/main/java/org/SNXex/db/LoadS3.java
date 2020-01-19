@@ -19,7 +19,7 @@ public class LoadS3 {
 	Log LOG = LogFactory.getLog(MethodHandles.lookup().lookupClass());
 	Faker _faker = new Faker();
 
-	String prefix = "2020/01/16/APAC";
+	String prefix = "2020/01/18/APAC";
 
 	public void load(BasicS3Util s3) throws Throwable {
 		_s3 = s3;

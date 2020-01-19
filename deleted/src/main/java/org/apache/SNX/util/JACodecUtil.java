@@ -16,7 +16,7 @@ import org.json.simple.parser.ParseException;
 
 public class JACodecUtil {
 
-	static public String toJ(List lst) {
+	static public String toJ(List lst) throws Throwable {
 		try {
 			JSONArray list = new JSONArray();
 			list.addAll(lst);
@@ -27,7 +27,7 @@ public class JACodecUtil {
 		}
 	}
 
-	static public String toJ(Map m) {
+	static public String toJ(Map m) throws Throwable {
 		try {
 			JSONObject obj = new JSONObject();
 			obj.putAll(m);
@@ -39,16 +39,28 @@ public class JACodecUtil {
 
 	}
 
-	static public Map toMap(String s) throws ParseException {
-		JSONParser _parser = new JSONParser();
-		Object obj = _parser.parse(s);
-		return (JSONObject) obj;
+	static public Map toMap(String s) throws Throwable {
+		try {
+			JSONParser _parser = new JSONParser();
+			Object obj = _parser.parse(s);
+			return (JSONObject) obj;
+
+		} catch (Throwable t) {
+			System.err.println(s);
+			throw t;
+		}
 	}
 
-	static public List toList(String s) throws ParseException {
-		JSONParser _parser = new JSONParser();
-		Object obj = _parser.parse(s);
-		return (JSONArray) obj;
+	static public List toList(String s) throws Throwable {
+		try {
+			JSONParser _parser = new JSONParser();
+			Object obj = _parser.parse(s);
+			return (JSONArray) obj;
+
+		} catch (Throwable t) {
+			System.err.println(s);
+			throw t;
+		}
 	}
 
 	/**
