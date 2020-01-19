@@ -33,12 +33,21 @@ public class JACodecUtil {
 		Object obj = _parser.parse(s);
 		return (JSONObject) obj;
 	}
-
+	
+	/**
+	 * 
+	 * @deprecated
+	 */
 	static public List toLst(String s) throws ParseException {
 		Object obj = _parser.parse(s);
 		return (JSONArray) obj;
 	}
 
+	static public List toList(String s) throws ParseException {
+		Object obj = _parser.parse(s);
+		return (JSONArray) obj;
+	}
+	
 	/**
 	 * 
 	 * @deprecated
