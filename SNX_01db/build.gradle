@@ -1,0 +1,65 @@
+
+// CONFIG:
+///////////////////////////////////////////////////////////////////////////////////////////
+plugins {
+    id 'scala'
+
+    id 'application'
+}
+
+// to config IDE $ gradle eclipse 
+repositories {
+    maven { url 'https://jitpack.io' }
+    mavenCentral()
+}
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+// PROJECT:
+///////////////////////////////////////////////////////////////////////////////////////////
+/*
+sourceSets {e 
+   main {
+      scala { srcDirs = ["src/main/scala"]}
+   }
+}
+*/
+
+dependencies {
+    implementation 'org.scala-lang:scala-library:2.13.1'
+    
+    implementation 'com.github.cekvenich:SNX:0.0.114'
+    
+    implementation group: 'org.apache.poi', 			  name: 'poi', 			  version: '4.1.1'
+    
+}
+application {
+    mainClassName = 'DBApp'
+}
+
+//BUILD:
+///////////////////////////////////////////////////////////////////////////////////////////
+jar {
+    manifest {
+        attributes( "Main-Class":'DBApp')
+    }
+    zip64 = true
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    exclude("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA")
+}
+
+task cleanUp() {
+  println 'clean build'
+  delete './build'
+}
+defaultTasks 'cleanUp', 'compileScala', 'build', 'run'
+
+/* wrapper {
+  gradleVersion = "6.0.1"
+} */
+
+//  ./gradlew --stop
+// ./gradlew build --refresh-dependencies./gr
+// to run: java -jar app1.jar
