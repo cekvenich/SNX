@@ -2,7 +2,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-import org.SNXa.http.HttpHandler;
+import org.SNXa.http.HttpHandlerImpl;
 import org.SNXa.http.Route1;
 import org.apache.SNX.IRoute;
 import org.apache.SNX.SNX;
@@ -24,7 +24,7 @@ public class WebApp {
 		routes.put(r1.getPath(), r1);
 		// routes done
 		String docRoot = System.getProperty("user.dir") + "/www";
-		_srv = new DefaultMainHttpServer(new HttpHandler(routes, docRoot));
+		_srv = new DefaultMainHttpServer(new HttpHandlerImpl(routes, docRoot));
 		_srv.start(8888);
 
 		System.out.println("end");

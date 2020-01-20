@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.SNX.IRoute;
-import org.apache.SNX.http.AbstractHTTPHandler;
+import org.apache.SNX.http.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hc.core5.http.ClassicHttpRequest;
@@ -21,7 +21,7 @@ import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.apache.hc.core5.http.protocol.HttpContext;
 import org.apache.hc.core5.net.URLEncodedUtils;
 
-public class HttpHandler extends AbstractHTTPHandler implements HttpRequestHandler {
+public class HttpHandlerImpl extends AbstracClassicHttpHandler implements HttpRequestHandler {
 
 	static Log LOG = LogFactory.getLog(MethodHandles.lookup().lookupClass());
 
@@ -29,7 +29,7 @@ public class HttpHandler extends AbstractHTTPHandler implements HttpRequestHandl
 
 	String _docRoot;
 
-	public HttpHandler(Map<String, IRoute> routes, String docRoot) {
+	public HttpHandlerImpl(Map<String, IRoute> routes, String docRoot) {
 		_routes = routes;
 		_docRoot = docRoot;
 		LOG.info(_docRoot);
