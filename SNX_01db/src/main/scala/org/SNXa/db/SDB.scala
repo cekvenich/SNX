@@ -49,7 +49,7 @@ class SDB /**
   configW.setCacheSize(cacheSize)
   configW.setBusyTimeout(120 * 1000)
   configW.setSynchronous(SynchronousMode.OFF)
-  configW.setJournalMode(JournalMode.TRUNCATE)
+  configW.setJournalMode(JournalMode.WAL)
   configW.setTempStore(TempStore.MEMORY)
   configW.enforceForeignKeys(false)
   configW.setReadUncommited(true)

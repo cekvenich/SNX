@@ -28,7 +28,7 @@ sourceSets {e
 dependencies {
     implementation 'org.scala-lang:scala-library:2.13.1'
     
-    implementation 'com.github.cekvenich:SNX:0.0.115'
+    implementation 'com.github.cekvenich:SNX:0.0.01'
     
     implementation group: 'org.apache.poi', 			  name: 'poi', 			  version: '4.1.1'
     
