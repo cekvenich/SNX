@@ -1,6 +1,5 @@
 
 
-
 import org.SNXa.db._
 
 import org.apache.SNX.SNX

@@ -155,8 +155,7 @@ Aside, before the '20s we started deploying to cloud. Now our IDE can be in the 
 Here is an example project folder that includes items we mentioned so far: Scala, gradle.build and SQLite. It is a simple Scala project that uses a Java lib (in the lib folder, but deployed )
  that measures how many records we can read from S3 and insert per second. You can change the code to have SQLite built-in feature to use RAM DB instead of disk. It leverages a few helper classes that I added to the SNX lib.
 
-- https://github.com/cekvenich/SNX/tree/master/SNX_01
-
+- https://github.com/intuition-dev/SNX/tree/master/SNX_01db
 
 ### Next: JAMstack.org
 
@@ -173,7 +172,7 @@ Also in 2010's Reactive programming became popular (I won't explain here what Re
 
 Here is an example Scala project folder that uses Apache http core library v5 that emits a simple 'REST' GET JSON response. It also acts as a simple HTTP Server, so you can write an index.html that uses **fetch()**, we don't use Ajax anymore. There is an HTML page that calls fetch() to GET a JSON response. The example is synchronous, but the library used supports reactive streams. 
 
-- https://github.com/cekvenich/SNX/tree/master/SNX_02
+- https://github.com/intuition-dev/SNX/tree/master/SNX_02web
 
 
 ## #6: Stress/Load testing
@@ -325,7 +324,7 @@ function webDriverFoo(WDcb) {
 
 ```
 
-
+- https://github.com/intuition-dev/SNX/tree/master/SNX_03E2Etst
 
 ## #10 Bonus: SSR (Server Side Rendering) with Pug
 
