@@ -23,6 +23,7 @@ object E2ETest {
 
   def main(args: Array[String]): Unit = {
     new SNX()
+
     val d: SeleniumUtil = new SeleniumUtil(
       "/home/vic/Downloads/chromedriver_linux64/chromedriver")
     val options: ChromeOptions = d.getOptions
@@ -42,6 +43,7 @@ object E2ETest {
     println("Ending: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
     val logs: List[LogEntry] = d.getLogList(driver, LogType.BROWSER)
     println(logs)
+    
   }
 
 }

@@ -211,7 +211,55 @@ Of course, same goes for IOS(ObjectiveC)) and Andorid(Java) apps. Back end engin
 
 This is similar to AWS Amplify or Google FiereBase, where you just download the .js libs and are not aware how the back end is implemented. Even if you implement a 3rd party backendless services like the 2 mentioned, you need a back end engineer to do the back ups and write the ViewModel.
 
-Note: I keep using REST in quotes, you don't have to do strict REST, but you must be able to write a stress test against it.
+Here is server code snippet using Apache http core:
+
+```
+  var _routes: Map[String, IRoute] = routes
+  var _docRoot: String = docRoot
+
+  def handle(req: ClassicHttpRequest, resp: ClassicHttpResponse, context: HttpContext) {
+      // browser and CDN cache:
+      resp.setHeader("Cache-Control", "public, max-age=" + 1 + ", s-max-age=" + 1)
+
+      var PATH: String = getPath(req)
+      // check if File in docRoot, else serve an SSR Route
+      var file: File = new File(this._docRoot + PATH)
+      if (file.exists() && !file.isDirectory()) {
+        serveAFile(file, resp, context)
+        return
+      }
+
+      // above is file, but now API route not found?
+      if (!_routes.containsKey(PATH)) {
+        var outgoingEntity: StringEntity = new StringEntity("no such resource " + PATH)
+        err(resp, outgoingEntity)
+        return
+      }
+
+	  //else we have an API route registered
+      var r = _routes.get("/API1")
+      var params = getParams(req)
+      var ret = r.ret(params)
+      var outgoingEntity = new StringEntity(ret)
+      good(resp, outgoingEntity)
+
+```
+
+And here is .js file loaded in a browser that calls above service:
+
+```
+	class UserVM {
+	   constructor(cb) {
+		  fetch('http://localhost:8888/API1')
+		  .then((response) => {
+		    return response.json()
+		  })
+		  .then((myJson) => {
+		   cb(myJson)
+		  })
+	   }
+	}//class
+```
 
 
 ## #9: Switch to E2E testing (with CI/CD).
@@ -234,16 +282,48 @@ In our case our lib will use Apache http core to do both, serve REST and serve h
 
 ### Lab Example: E2E Test ( test the client side API/ViewModel)
 
-X
-X
-X
-X
-X
-X
-X
-Here is the Qunit
+I will now show the Selenium code since this is classic code (and the full source code example code is available in this git project).
 
-Here is the call to QUnit from Selenium.
+But I'll show you the QUnit javascript/typescript code on the client called by Selenium, that tests the ViewModel:
+
+```
+class TestVM1 {
+   constructor () {
+      depp.define({'vm1':'/api/UserVM.js'})
+      depp.require(['vm1'], function(){
+
+      QUnit.test( "hello tests", function( assert ) {
+         TestVM1._done1 = assert.async()
+         TestVM1._assert = assert
+         console.log('in test:')
+         new UserVM(function(json){
+            console.log(json)
+            _WDcb(json)
+            TestVM1._assert.ok(true) //passed. Should check json, but...
+            TestVM1._done1()
+         })
+      })//tests
+      })//req
+   }//()
+}//class
+
+// setup the webdrive callback
+var _WDcb
+function webDriverFoo(WDcb) {
+   _WDcb = WDcb
+   console.log('start tests')
+   var pro = loadQunit()
+   pro.then(function(){
+      QUnit.config.autostart = false
+
+      console.log('qunit loaded')
+   
+      //QUnit.start()
+      new TestVM1()
+   })//pro
+}
+
+```
 
 
 
