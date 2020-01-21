@@ -12,14 +12,12 @@ import de.neuland.jade4j.template.JadeTemplate
 
 import de.neuland.jade4j.template.TemplateLoader
 
-
 //remove if not needed
 import scala.collection.JavaConversions._
 
-
 class Pug {
 
-   var _render: JadeConfiguration = new JadeConfiguration()
+  var _render: JadeConfiguration = new JadeConfiguration()
 
   def Pug(): String = {
     val cwd: String = System.getProperty("user.dir")
@@ -28,7 +26,7 @@ class Pug {
     _render.setTemplateLoader(loader)
     _render.setCaching(false)
     val template1: JadeTemplate = _render.getTemplate("index.pug")
-    
+
     val model1: java.util.Map[String, Object] = new java.util.HashMap[String, Object]()
     model1.put("city", "Bremen")
     //binding
