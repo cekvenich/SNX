@@ -7,5 +7,5 @@ Best pratices Java eco system for 2020s. And next version of Spark, Spring, Akka
 With Scala and Java libs.
 
 Docs:
-- https://intuition-dev.github.io/SNX
+- https://intuition-dev.github.io/SNX/#/README
 
