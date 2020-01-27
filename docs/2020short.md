@@ -9,25 +9,16 @@ I(Vic Cekvenich) published and 4 page article 'Java ecosystem's 10 New Best Prac
 
 Here is the TOC:
 
-#1. Scala, Kotlin, Groovy
-
-#2: Cloud, eg.: S3
-
-#3: DB in RAM Memory
-
-#4: Tools: Gradle.build, Jitpack, Jitpack CI/CD, Cloud IDE.
-
-#5: JAR for Services/'REST', with Reactive Streams
-
-#6: Stress/Load testing
-
-#7: Cloud Devops
-
-#8: Client side API, Client side ViewModel
-
-#9: Switch testing focus to: E2E testing
-
-#10 SSR (Server Side Rendering) with Pug
+#1. Scala, Kotlin, Groovy \n
+#2: Cloud, eg.: S3 \n
+#3: DB in RAM Memory \n
+#4: Tools: Gradle.build, Jitpack, Jitpack CI/CD, Cloud IDE. \n
+#5: JAR for Services/'REST', with Reactive Streams \n
+#6: Stress/Load testing \n
+#7: Cloud Devops \n
+#8: Client side API, Client side ViewModel \n
+#9: Switch testing focus to: E2E testing \n
+#10 SSR (Server Side Rendering) with Pug \n
 
 I hope that you'd like to review the entire article, please click https://intuition-dev.github.io/SNX/#/README 
 
