@@ -9,7 +9,7 @@ I(Vic Cekvenich) published and 4 page article 'Java ecosystem's 10 New Best Prac
 
 Here is the TOC:
 
-#1. Scala, Kotlin, Groovy  
+#1. Scala, Kotlin, Groovy <br /> 
 #2: Cloud, eg.: S3 <br />
 #3: DB in RAM Memory <br />
 #4: Tools: Gradle.build, Jitpack, Jitpack CI/CD, Cloud IDE. <br />
@@ -20,7 +20,7 @@ Here is the TOC:
 #9: Switch testing focus to: E2E testing <br />
 #10 SSR (Server Side Rendering) with Pug <br />
 
-I hope that you'd like to review the entire article, please click https://intuition-dev.github.io/SNX/#/README 
+I hope that you'd like to read the entire article, please click https://intuition-dev.github.io/SNX/#/README 
 
 
 
