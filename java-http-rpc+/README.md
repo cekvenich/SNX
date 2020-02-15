@@ -19,12 +19,12 @@ It is a stand alone http server based on
 
 ## Client side
 
-Of course Java does not run front-end, so you have to run the browser side as javascript from the http-rpc+/web folder, and index.html ( https://github.com/INTUITION-dev/mbToolBelt/tree/master/http-rpc%2B/web )
+Of course Java does not run front-end, so you have to run the browser side as javascript from the http-rpc+/web folder, and index.html ( https://github.com/intuition-dev/mbToolBelt/tree/master/http-rpc%2B/web )
 
 So start an http server to run the index.html in that folder. It will make some dummy RPC calls.
 
 In production you should use this front-end:
-```https://cdn.jsdelivr.net/gh/INTUITION-dev/mbToolBelt@v3.12.100/http-rpc+/web/httpRPC.min.js ```
+```https://cdn.jsdelivr.net/gh/intuition-dev/mbToolBelt@v3.14.15/http-rpc+/web/httpRPC.min.js ```
 
 
 ### Demo
