@@ -1,0 +1,77 @@
+
+// CONFIG
+
+plugins {
+
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '6.0.0'
+
+    id 'eclipse'
+}
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+
+// PROJECT
+///////////////////////////////////////////////////////////////////////////////////////////
+dependencies {
+    implementation group: 'org.slf4j', 		     	  name: 'slf4j-api', version: '1.7.30'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.13.1'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.1'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.1'
+
+    implementation group: 'org.apache.httpcomponents.core5', name: 'httpcore5', version: '5.0.1' 
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+     
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.13'
+}
+
+// BULID:
+///////////////////////////////////////////////////////////////////////////////////////////
+application {
+    mainClassName = 'RpcSrv'
+}
+
+archivesBaseName = 'RpcSrv'
+shadowJar {
+    baseName = 'RpcSrv'
+    classifier = ''
+    archiveVersion = ''
+}
+tasks.build.dependsOn tasks.shadowJar
+artifacts {
+    archives shadowJar
+}
+task cleanUp() {
+    println 'clean build'
+    delete './build'
+}
+
+task copyArt() { // copy artifact
+    doLast {
+    copy {
+        from file("$buildDir/libs/RpcSrv.jar")
+        into file(".")
+    }
+    println 'copied artifact to root'
+    }
+}
+
+defaultTasks 'cleanUp', 'shadowJar', 'copyArt'
+
+// Usage notes:
+///////////////////////////////////////////////////////////////////////////////////////////
+/*
+This should create a new jar in the root folder
+
+./gradlew
+
+*/
